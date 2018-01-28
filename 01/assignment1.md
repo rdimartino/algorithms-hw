@@ -1,7 +1,9 @@
 # Assignment 1 - CS 4071 - Spring 2018
 
-*Due: 2018-01-26*  
+*Due: 2018-01-29*
 *Group #13: Robert DiMartino (dimartrt), Hayden Schiff (schiffha), Jeremiah Leak (leakjz)*
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Exercise 1.1
 
@@ -10,6 +12,7 @@
 ### a. $x^{123}$
 
 $$
+123 = 2^{6}+2^{5}+2^{4}+2^{3}+2^{1}+2^{0}\\
 123 = 1111011_{2}\\
 x \rightarrow x \times (x)^{2} = x^{3} \rightarrow x \times (x^{3})^{2} = x^{7} \rightarrow x \times (x^{7})^{2} \\
 = x^{15} \rightarrow (x^{15})^{2} = x^{30} \rightarrow x \times (x^{30})^{2} = x^{61} \rightarrow x \times (x^{61})^{2} = x^{123}
@@ -18,6 +21,7 @@ $$
 ### b. $x^{64}$
 
 $$
+64 = 2^{6}\\
 64 = 1000000_{2}\\
 x \rightarrow (x)^{2} = x^{2} \rightarrow (x^{2})^{2} = x^{4} \rightarrow (x^{4})^{2}\\
 = x^{8} \rightarrow (x^{8})^{2} = x^{16} \rightarrow (x^{16})^{2} = x^{32} \rightarrow (x^{32})^{2} = x^{64}
@@ -26,6 +30,7 @@ $$
 ### c. $x^{65}$
 
 $$
+65 = 2^{6}+2^{0}\\
 65 = 1000001_{2}\\
 x \rightarrow (x)^{2} = x^{2} \rightarrow (x^{2})^{2} = x^{4} \rightarrow (x^{4})^{2}\\
 = x^{8} \rightarrow (x^{8})^{2} = x^{16} \rightarrow (x^{16})^{2} = x^{32} \rightarrow x \times (x^{32})^{2} = x^{65}
@@ -34,6 +39,7 @@ $$
 ### d. $x^{711}$
 
 $$
+711 = 2^{9} + 2^{7}+2^{6}+2^{2}+2^{1}+2^{0}\\
 711 = 1011000111_{2}\\
 x \rightarrow (x)^{2} = x^{2} \rightarrow x \times (x^{2})^{2} = x^{5} \rightarrow x \times (x^{5})^{2} = x^{11} \rightarrow (x^{11})^{2} = x^{22} \rightarrow (x^{22})^{2}\\
 = x^{44} \rightarrow (x^{44})^{2} = x^{88} \rightarrow x \times (x^{88})^{2} = x^{177} \rightarrow x \times (x^{177})^{2} = x^{355} \rightarrow x \times (x^{355})^{2} = x^{711}
@@ -117,7 +123,14 @@ $$
 
 **Problem**: Give a formula for $\mathrm{lcm}(a,b)$ in terms of $\gcd(a,b)$.
 
-$\mathrm{lcm}(a, b) = a \times b \div \gcd(a, b)$
+$n$ is a multiple of $x$ if there exists some integer $p$ such that $x \times p = n$. Let $m=\mathrm{lcm}(a,b)$. $m$ must contain all of the prime factors of both $a$ and $b$. Clearly, $a  b$ is a multiple of both $a$ and $b$ because $a \times b = ab = b \times a$ and $ab$ contains all of the prime factors of both $a$ and $b$. Is there a smaller common multiple? Yes! $ab$ is double-counting all of the prime factors that $a$ and $b$ share. The product of these shared factors is $\gcd(a,b)$.  We can divide those shared factors out of the product and see that this is still a common multiple of both $a$ and $b$ because:
+$$
+a \times \frac{b}{\gcd(a,b)} = \frac{ab}{\gcd(a,b)} = b \times \frac{a}{\gcd(a,b)}
+$$
+
+And $\gcd(a,b) \ge 1$ therefore $\frac{ab}{\gcd(a,b)} \le ab$. So we arrive at our formula for the $\mathrm{lcm}(a,b)$:
+
+ $\mathrm{lcm}(a, b) = a \times b \div \gcd(a, b)$
 
 ## 4. Exercise 1.17
 
@@ -212,35 +225,115 @@ $W(n) = 1 + 2(n - 2) = 2n - 3$
 
 **Problem**: Design a recursive version of *InsertionSort*.
 
+**function** $\mathrm{recursiveInsertionSort}(a[0:n-1], k)$  
+**Input:** $L[0:n-1]$ (an array of $n$ elements), $k$ (an index of list $L$)  
+**Output:** $L[0:n-1]$ with elements $L[0:k]$ sorted in ascending order
+
+```
+# initial condition
+# a list of one element is already sorted
+if k==0:
+	return
+endif
+
+# recursively call function to sort up to index k-1
+recursiveInsertionSort(L[0:n-1], k-1);
+
+insertElement ← L[k] # element to sort
+i ← k-1
+# shift all elements greater than the
+# insertElement up one position in L
+while i >= 0 and L[i] > insertElement:
+	L[i+1] ← L[i]
+	i ← i-1
+endwhile
+L[i] ← L[k]
+```
+
 ### Part b.
 
 **Problem**: Design a recursive linked list version of *InsertionSort*.
 
+**function** $\mathrm{recDLLInsertionSort}(a[0:n-1], k)$  
+**Input:** $head$ (a pointer to the head node of a doubly linked list), $tail$ (a pointer to a node in the doubly linked list pointed to by $head$)  
+**Output:** A doubly linked list where the nodes from $head$ to $tail$ are sorted in ascending order
+
+```
+# initial condition
+# a list of one node is already sorted
+if head == tail:
+	return
+endif
+
+# recursively call function to sort up to the
+# node before tail
+recursiveInsertionSort(head, tail.previous);
+
+insertNode ← tail # node to sort
+
+# set cursor and remove insertNode
+cursor ← insertNode.previous
+cursor.next ← insertNode.next
+if tail.next is not null:
+	tail.next.prev ← cursor
+endif
+
+while cursor is not null and cursor.data > insertNode.data:
+	cursor ← cursor.previous
+endwhile
+
+# move insertNode into sorted position
+if cursor is null: # insertNode is the smallest
+	head.prev ← insertNode
+	insertNode.next ← head
+	insertNode.prev ← null
+	head = insertNode
+else:
+	cursor.next.prev ← insertNode
+	insertNode.next ← cursor.next
+	insertNode.prev ← cursor
+	cursor.next ← insertNode
+endif
+```
+
+
+
 ## 8. Exercise 1.19
 
 **Problem**: Describe a modification of *HornerEval* that solves this particular evaulation problem using only $n+1$ multiplications and $n+1$ additions.
+
+_TA Note: This solution was found before the hint was given in class._
+
+If we modified the polynomial to just look at the even powers of $x$, i.e. $P_{even}(x) = a_{0} + a_{2}x^{2} + a_{4}x^{4} + \cdots$, we noticed that $P_{even}(x) = P_{even}(-x)$. This is because all even powers $x^{2k}$ an be re-written $(x^{2})^{k}$ and $(-x)^{2} =x^{2}$.
+
+Similiary, for a polynomial of just the odd powers of $x$, i.e. $P_{odd}(x) = a_{1}x + a_{3}x^{3} + a_{5}x^{5} + \cdots$, we noticed that $P_{odd}(-x) = -P_{odd}(x)$. This is because for all odd powers
+$$
+(-x)^{2k+1} = (-x) \times (-x)^{2k}=(-x) \times (-x)^{2k}=-(x \times x^{2k})=-x^{2k+1}
+$$
+
+Using these two observations, we modified Horner's algorithm to keep track of two sums, one for the even powers of $x$ and one for the odd powers of $x$. The extra multiplication comes from keep track of $v^{2}$ and the extra addition comes from the return when we have to sum and difference the even and odd sums.
 
 **function** $\mathrm{ModifiedHornerEval}(a[0:n], v)$  
 **Input:** $a[0:n]$ (an array of real numbers), $v$ (a real number)  
 **Output:** the values of polynomial $P(x)=a_{n}x^{n}+a_{n-1}x^{n-1}+\cdots+a_{1}x+a_{0}$ at $x = v$ and $x = -v$
 
 ```
-v2 = v*v
+vSquared ← v*v
 if n is even:
-	EvenSum <= a[n]
-	OddSum <= 0
+	EvenSum ← a[n]
+	OddSum ← 0
 else:
-	EvenSum <= 0
-	OddSum <= a[n]
+	EvenSum ← 0
+	OddSum ← a[n]
 endif
-for i <= n-1 downto 0 do:
+for i ← n-1 downto 0 do:
 	if i is even:
-		EvenSum <= EvenSum * v2 + a[i]
+		EvenSum ← EvenSum * vSquared + a[i]
 	else:
-		OddSum <= OddSum * v2 + a[i]
+		OddSum ← OddSum * vSquared + a[i]
 	endif
 endfor
-OddSum = OddSum*v
+OddSum ← OddSum*v
 return(P(v) is EvenSum+OddSum and P(-v) is EvenSum-OddSum)
 ```
 
