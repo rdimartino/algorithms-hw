@@ -109,3 +109,93 @@ $$
 $$
 
 Since $S(n) \in O(n \ln^{2}{n})$ and $S(n) \in \Omega(n\ln^{2}{n})$, then $S(n) \in \Theta(n\ln^{2}n)$.
+
+## 4. Exercise 3.37
+
+### a.
+**Problem**: Give a recurrence relation for the worst-case complexity $W(n)$ of `TriMergeSort` for an input list of size $n$.
+
+### b.
+**Problem**: Solve the recurrence formula you have given in (a) to obtain an explicit formula for the worst-case complexity $W(n)$ of `TriMergeSort`.
+
+### c.
+**Problem**: Which is more efficient in the worst case, `MergeSort` or `TriMergeSort`? Discuss.
+
+## 5.
+**Problem**: Consider the sorting algorithm Insertion Sort for sorting a list `L[0:n – 1]`. **Derive** a recurrence relation for the worst-case complexity $W(n)$ and **solve**.
+
+## 6. Exercise 3.35
+**Problem**: Solve the following recurrence relations
+
+### a. $t(n) = 3t(n-1) + n, n \geq 1$, init. cond. $t(0) = 0$
+
+$$
+t(n) = 3t(n-1) + n \\
+t(n) = 3(3t(n-2) + n-1) + n \\
+= 3^{2}t(n-2) + 3(n-1) + n \\
+t(n) = 3^{2}(3t(n-3) + n-2) + 3(n-1) + n\\
+= 3^{3}t(n-3) + 3^{2}(n-2) + 3(n-1) + n\\
+\vdots \\
+t(n) = 3^{k}t(n-k)+3^{k-1}(n-k+1) + \dots + 3^{2}(n-2)  + 3(n-1) + n
+$$
+
+When $k = n$,
+$$
+t(n) = 3^{n}t(0)+3^{n-1}(1) + 3^{n-2}(2)  + \dots + 3^{2}(n-2)  + 3(n-1) + n
+$$
+Applying the initial conditon, $t(0) = 0$,
+$$
+t(n) = 3^{n-1} + 3^{n-2}(2)  + \dots + 3^{2}(n-2)  + 3(n-1) + n \\
+t(n) = 3^{n-1}\left(1 + \frac{2}{3} + \dots + \frac{n-2}{3^{n-3}} + \frac{n-1}{3^{n-2}} + \frac{n}{3^{n-1}} \right)
+$$
+
+Note that for the sum of the first $n+1$ terms of a geometric series (where $r \neq 1$)
+$$
+1+r+r^{2}+r^{3}+\dots+r^{n-1}+r^{n} = \frac{1-r^{n+1}}{1-r}
+$$
+And differentiation both sides with respect to $r$ yields:
+$$
+0+ 1+2r+3r^{2}+\dots+(n-1)r^{n-2}+nr^{n-1} =\frac{nr^{n+1}-(n+1)r^{n}+1}{(1-r)^{2}}
+$$
+And when $r=\frac{1}{3}$,
+$$
+1 + \frac{2}{3} + \dots + \frac{n-2}{3^{n-3}} + \frac{n-1}{3^{n-2}} + \frac{n}{3^{n-1}} =\frac{n(\frac{1}{3})^{n+1}-(n+1)(\frac{1}{3})^{n}+1}{(1-\frac{1}{3})^2} \\
+= \frac{1}{4}\times\frac{1}{3^{n-1}}\times(-2n+3^{n+1}-3)
+$$
+Plugging that result back into the recurrence relation gives:
+$$
+t(n) = 3^{n-1}\left( \frac{1}{4}\times\frac{1}{3^{n-1}}\times(-2n+3^{n+1}-3) \right)
+$$
+Which reduces to:
+$$
+t(n) = \frac{1}{4}\times(-2n+3^{n+1}-3)
+$$
+
+
+### b. $t(n) = 4t(n-1) + 5, n \geq 1$, init. cond. $t(0) = 2$
+
+$$
+t(n) = 4t(n-1) + 5 \\
+t(n) = 4(4t(n-2) + 5) + 5 \\
+= 4^{2}t(n-2) + 4\times5 + 5 \\
+t(n) = 4^{2}(4t(n-3) + 5) + 4\times5 + 5 \\
+= 4^{3}t(n-3)+4^{2}\times5+ 4\times5 + 5 \\
+\vdots \\
+t(n) = 4^{k}t(n-k) + 4^{k-1}\times5+\dots+4^{2}\times5+ 4\times5 + 5
+$$
+
+When $k=n$,
+$$
+t(n) = 4^{k}t(0) + 4^{n-1}\times5+\dots+4^{2}\times5+ 4\times5 + 5
+$$
+Applying the initial conditon, $t(0) = 2$,
+$$
+t(n) = 4^{n}\times2 + 4^{n-1}\times5 + \dots+4^{2}\times5 + 4\times5 + 5 \\
+t(n) = 4^{n}\times5 - 4^{n}\times3 + 4^{n-1}\times5 + \dots+4^{2}\times5 + 4\times5 + 5 \\
+t(n) = 4^{n}\times5 \left( 1+\frac{1}{4}+\frac{1}{4^{2}} +\dots+ \frac{1}{4^{n-2}} + \frac{1}{4^{n-1}} \right)  - 4^{n}\times3 \\
+t(n) =4^{n}\times5 \left( \frac{1-(\frac{1}{4})^{n}}{1-\frac{1}{4}}\right) - 4^{n}\times3
+$$
+Which reduces to:
+$$
+t(n) = \frac{1}{3}(4^{n}\times11 - 5)
+$$
