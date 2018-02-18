@@ -72,3 +72,40 @@ $$
 = 0 \\
 \therefore O(2^{n}) \subset O(3^{n})
 $$
+
+## 3. Exercise 3.26
+
+**Problem**: Obtain a formula for the order of $S(n) = \sum_{i=1}^{n}(\ln{i})^{2}$.
+
+We start by showing that $S(n) \in O(n \ln^{2}{n})$.
+$$
+S(n) = \sum_{i=1}^{n}(\ln{i})^{2} = \sum_{i=1}^{n}\ln^{2}{i} \\
+= \ln^{2}{1} + \ln^{2}{2} + \dots + \ln^{2}{n}
+$$
+It can be shown that $f(x) = \ln^{2}x$ has a global minimum as $x=1$ and is increasing for $x\geq1$. So it holds that $\ln^{2}a \leq \ln^{2}b$ when $1 \leq a \leq b$. It follows that,
+$$
+\ln^{2}{1} + \ln^{2}{2} + \dots + \ln^{2}{n}
+\leq \ln^{2}{n} + \ln^{2}{n} + \dots + \ln^{2}{n} \\
+= n \ln^{2}{n} \\
+\therefore S(n) \in O(n \ln^{2}{n})
+$$
+Now, we intend to show that $S(n) \in \Omega(n\ln^{2}{n})$. Let $m=\lfloor n/2 \rfloor$. Then,
+$$
+S(n) = \sum_{i=1}^{n}\ln^{2}{i} = \sum_{i=1}^{m}\ln^{2}{i} + \sum_{i=m+1}^{n}\ln^{2}{i} \\
+\geq \sum_{i=m+1}^{n}\ln^{2}{i} = \ln^{2}(m+1) + \ln^{2}(m+2) + \dots + \ln^{2}{n} \\
+\geq \ln^{2}(m+1)  + \ln^{2}(m+1)  + \dots + \ln^{2}(m+1) \\
+= (n-m)\ln^{2}(m+1) \\
+\geq \frac{n}{2}\ln^{2}\left(\frac{n}{2}\right) \\
+= \frac{n}{2}\left( \ln{n} - \ln{2}\right)^{2}
+$$
+
+For sufficiently large $n$,
+$$
+\frac{n}{2}\left( \ln{n} - \ln{2}\right)^{2} \geq \frac{n}{2}\left( \ln{n} - \frac{\ln{n}}{2}\right)^{2} \\
+= \frac{n}{2}\left( \frac{\ln{n}}{2}\right)^{2} \\
+= \frac{n}{8}(\ln{n})^2 \\
+= \frac{1}{8}(n\ln^{2}{n})\\
+\therefore S(n) \in \Omega(n\ln^{2}{n})
+$$
+
+Since $S(n) \in O(n \ln^{2}{n})$ and $S(n) \in \Omega(n\ln^{2}{n})$, then $S(n) \in \Theta(n\ln^{2}n)$.
