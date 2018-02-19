@@ -1,6 +1,6 @@
 # Assignment 2 - CS 4071 - Spring 2018
 
-*Due: 2018-02-19*
+*Due: 2018-02-19*  
 *Group #13: Robert DiMartino (dimartrt), Hayden Schiff (schiffha), Jeremiah Leak (leakjz)*
 
 <div style="page-break-after: always;"></div>
@@ -9,7 +9,7 @@
 
 **Problem**: Give pseudocode for interpolation search, and analyze its worst-cast complexity.
 
-The idea here is to modify a Binary Search to assign `mid` the index we where would expect to find to find `X` if the elements of `L` were on a straight line from `(low,L[low])` to `(high,L[high])`. This requires solving the following:
+The idea here is to modify a Binary Search to assign `mid` to the index we where would expect to find to find `X` if the elements of `L` were on a straight line from `(low,L[low])` to `(high,L[high])`. This requires solving the following:
 $$
 y-y_{1} = m(x-x_{1}) \\
 m = \frac{y_{2}-y_{1}}{x_{2}-x_{1}} \\
@@ -31,7 +31,7 @@ case
 	:default: return(InterpolationSearch(L[0:n-1], mid+1, high, X))
 endcase
 ```
-The worst-case complexity for Interpolation search occurs when searching for the second to last element when the last element is much larger than the other elements in the list, e.g. searching for the index of `5` in `[1,2,3,4,5,99999]`. In this case, `mid` will be set to `low` in the interpolation step, so every index from `0` to `n-1` will be checked. This means that the worst-case complexity $W(n) \in O(n)$.
+The worst-case complexity for Interpolation search occurs when searching for the second to last element when the last element is much larger than the other elements in the list, e.g. searching for the index of `5` in `[1,2,3,4,5,99999]`. In this case, `mid` will be set to `low` in the interpolation step, so every index from `0` to `n-1` will be checked. This means that the worst-case complexity is $W(n) \in O(n)$.
 
 ## 2. Exercise 3.6
 
@@ -40,7 +40,7 @@ $$
 O(108) \subset O(\log{n}) \subset O(n) \subset O(n \log{n}) \subset O(n^{2}) \subset O(n^{3}) \subset O(2^{n}) \subset O(3^{n})
 $$
 
-The Ratio Limit theorem says that $\lim_{n \rightarrow \infty} f(n)/g(n)=0 \implies O(f(n)) \subset O(g(n))$. So in order to prove thie former, we need to show that the corresponding limit is zero for each consecutive pair of functions.  This will require liberal application of L'Hôpital's Rule.
+The Ratio Limit theorem says that $\lim_{n \rightarrow \infty} f(n)/g(n)=0 \implies O(f(n)) \subset O(g(n))$. So in order to prove the former, we need to show that the corresponding limit is zero for each consecutive pair of functions. This will require liberal application of L'Hôpital's Rule.
 
 ### i.
 
@@ -176,7 +176,7 @@ $$
 ### c.
 **Problem**: Which is more efficient in the worst case, `MergeSort` or `TriMergeSort`? Discuss.
 
-The asymptotic behavior of `MergeSort` and `TriMergeSort` is similar. For sufficiently large $n$, the $n\log_{2}{n}$ and the $n\log_{3}{n}$ terms, respectively, dominant the growth of the worst-case complexities. We also recall that the change of base for logarithms is a constant, which implies that $n\log_{a}{n} \in \Theta(n\log{n})$ for any base $a>1$. Therefore, despite the different bases, `MergeSort` and `TriMergeSort` are both order $n\log{n}$.
+The asymptotic behavior of `MergeSort` and `TriMergeSort` is similar. For sufficiently large $n$, the $n\log_{2}{n}$ and the $n\log_{3}{n}$ terms, respectively, dominate the growth of the worst-case complexities. We also recall that the change of base for logarithms is a constant, which implies that $n\log_{a}{n} \in \Theta(n\log{n})$ for any base $a>1$. Therefore, despite the different bases, `MergeSort` and `TriMergeSort` are both order $n\log{n}$.
 
 Because of the additional implementation complexity of `TriMergeSort`, `MergeSort` should be preferred.
 
@@ -185,7 +185,7 @@ Because of the additional implementation complexity of `TriMergeSort`, `MergeSor
 
 To measure the complexity of Insertion Sort we consider the number of operations it takes to scan the list and shift elements in the list as appropriate.
 
-For a list of size $n=1$, the list is already sorted and it requires no further operations. This gives us our initial condition: $W(1)=0$.
+For a list of size $n=1$, the list is already sorted and requires no further operations. This gives us our initial condition: $W(1)=0$.
 
 In a list that is sorted in reverse order, we have to scan and shift the entire remaining list to move the element to the start of the list. This is the worst case for Insertion Sort.
 
@@ -233,7 +233,7 @@ When $k = n$,
 $$
 t(n) = 3^{n}t(0)+3^{n-1}(1) + 3^{n-2}(2)  + \dots + 3^{2}(n-2)  + 3(n-1) + n
 $$
-Applying the initial conditon, $t(0) = 0$,
+Applying the initial condition, $t(0) = 0$,
 $$
 t(n) = 3^{n-1} + 3^{n-2}(2)  + \dots + 3^{2}(n-2)  + 3(n-1) + n \\
 t(n) = 3^{n-1}\left(1 + \frac{2}{3} + \dots + \frac{n-2}{3^{n-3}} + \frac{n-1}{3^{n-2}} + \frac{n}{3^{n-1}} \right)
@@ -297,8 +297,8 @@ $$
 **Problem**: Prove by induction that
 $$
 \begin{pmatrix}
-fib(n) \\
-fib(n+1)
+\mathrm{fib}(n) \\
+\mathrm{fib}(n+1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -309,11 +309,11 @@ fib(n+1)
 1
 \end{pmatrix}
 $$
-Start with the base case when $n=0$. We want to show that $fib(0)=0$ and $fib(1)=1$. Note, for matrix $A$, $A^{0}=I$, where $I$ is the identity matrix:
+Start with the base case when $n=0$. We want to show that $\mathrm{fib}(0)=0$ and $\mathrm{fib}(1)=1$. Note, for matrix $A$, $A^{0}=I$, where $I$ is the identity matrix:
 $$
 \begin{pmatrix}
-fib(0)  \\
-fib(1)
+\mathrm{fib}(0)  \\
+\mathrm{fib}(1)
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -343,13 +343,13 @@ fib(1)
 0  \\
 1
 \end{pmatrix} \\
-\therefore fib(0)=0, fib(1)=1
+\therefore \mathrm{fib}(0)=0, \mathrm{fib}(1)=1
 $$
-Then, for the induction step, assume the claim is true for $n-2$, i.e.:
+Then, for the induction step, assume the claim is true for $n-2​$, i.e.:
 $$
 \begin{pmatrix}
-fib(n-2) \\
-fib(n-1)
+\mathrm{fib}(n-2) \\
+\mathrm{fib}(n-1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -367,8 +367,8 @@ $$
 1 & 1
 \end{pmatrix}^{2}
 \begin{pmatrix}
-fib(n-2) \\
-fib(n-1)
+\mathrm{fib}(n-2) \\
+\mathrm{fib}(n-1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -392,8 +392,8 @@ fib(n-1)
 1 & 1
 \end{pmatrix}
 \begin{pmatrix}
-fib(n-2) \\
-fib(n-1)
+\mathrm{fib}(n-2) \\
+\mathrm{fib}(n-1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -409,8 +409,8 @@ fib(n-1)
 1\times0+1\times1 & 1\times1+1\times1
 \end{pmatrix}
 \begin{pmatrix}
-fib(n-2) \\
-fib(n-1)
+\mathrm{fib}(n-2) \\
+\mathrm{fib}(n-1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -426,8 +426,8 @@ fib(n-1)
 1 & 2
 \end{pmatrix}
 \begin{pmatrix}
-fib(n-2) \\
-fib(n-1)
+\mathrm{fib}(n-2) \\
+\mathrm{fib}(n-1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -439,8 +439,8 @@ fib(n-1)
 \end{pmatrix} \\
 
 \begin{pmatrix}
-fib(n-2)+fib(n-1) \\
-fib(n-2)+2fib(n-1)
+\mathrm{fib}(n-2)+\mathrm{fib}(n-1) \\
+\mathrm{fib}(n-2)+\mathrm{fib}(n-1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -451,18 +451,18 @@ fib(n-2)+2fib(n-1)
 1
 \end{pmatrix} \\
 $$
-By definition, we have $fib(n)=fib(n-2)+fib(n-1)$, and it easy to show that the following is true.
+By definition, we have $fib(n)=fib(n-2)+fib(n-1)​$, and it easy to show that the following is true.
 
 $$
-fib(n+1)=fib(n-2)+2fib(n-1) \\
-=fib(n-2)+fib(n-1)+fib(n-1) \\
-=fib(n-1)+fib(n)
+\mathrm{fib}(n+1)=\mathrm{fib}(n-2)+2\,\mathrm{fib}(n-1) \\
+=\mathrm{fib}(n-2)+\mathrm{fib}(n-1)+\mathrm{fib}(n-1) \\
+=\mathrm{fib}(n-1)+\mathrm{fib}(n)
 $$
 Therefore,
 $$
 \begin{pmatrix}
-fib(n) \\
-fib(n+1)
+\mathrm{fib}(n) \\
+\mathrm{fib}(n+1)
 \end{pmatrix}=
 \begin{pmatrix}
 0 & 1 \\
@@ -476,8 +476,8 @@ $$
 
 ### b.
 
-**Problem**: Briefly describe how the preceding formula can be employed to design an algorithm for computing $fib(n)$ using only at most $8\log_{2}{n}$ multiplications.
+**Problem**: Briefly describe how the preceding formula can be employed to design an algorithm for computing $\mathrm{fib}(n)$ using only at most $8\log_{2}{n}$ multiplications.
 
-Assume that $n = 2^{k}$. Then the exponentiated matrix, $\begin{pmatrix}0 & 1 \\1 & 1\end{pmatrix}^{n}$, can be calculated using a modified version of the recursive`Powers` algorithm based on the left-to-right binary method.  The `Powers` algorithm uses $\log_{2}{n}$ multiplications to compute $x^{n}$. A key difference here is that we are doing matrix multiplication, which requires 8 multiplications to do one matrix multiplication (2 multiplications for each cell in a 2x2 matrix).
+Assume that $n = 2^{k}​$. Then the exponentiated matrix, $\begin{pmatrix}0 & 1 \\1 & 1\end{pmatrix}^{n}​$, can be calculated using a modified version of the recursive`Powers` algorithm based on the left-to-right binary method.  The `Powers` algorithm uses $\log_{2}{n}​$ multiplications to compute $x^{n}​$. A key difference here is that we are doing matrix multiplication, which requires 8 multiplications to do one matrix multiplication (2 multiplications for each cell in a 2x2 matrix).
 
- The value of $fib(n)$ is computed when the power on the matrix term is $n-1$, it is the value in the lower cell of the resulting matrix product. This means the exponentiated matrix can be calculated with $8\log_{2}(n-1)$ multiplications. But it takes another four multiplication steps to multiply by that matrix by $\begin{pmatrix}0 \\ 1\end{pmatrix}$, therefore it takes at most $8\log_{2}{n}$ multiplications to calculate $fib(n)$.
+The value of $\mathrm{fib}(n)$ is computed when the power on the matrix term is $n-1$, it is the value in the lower cell of the resulting matrix product. This means the exponentiated matrix can be calculated with $8\log_{2}(n-1)$ multiplications. But it takes another four multiplication steps to multiply by that matrix by $\begin{pmatrix}0 \\ 1\end{pmatrix}$; therefore, it takes at most $8\log_{2}{n}$ multiplications to calculate $\mathrm{fib}(n)$.
