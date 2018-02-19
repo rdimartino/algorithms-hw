@@ -13,7 +13,7 @@
 
 **Problem**: Using the Ratio Limit Theorem, prove the following:
 $$
-O(108) \subset O(\ln{n}) \subset O(n) \subset O(n \ln{n}) \subset O(n^{2}) \subset O(n^{3}) \subset O(2^{n}) \subset O(3^{n})
+O(108) \subset O(\log{n}) \subset O(n) \subset O(n \log{n}) \subset O(n^{2}) \subset O(n^{3}) \subset O(2^{n}) \subset O(3^{n})
 $$
 
 The Ratio Limit theorem says that $\lim_{n \rightarrow \infty} f(n)/g(n)=0 \implies O(f(n)) \subset O(g(n))$. So in order to prove thie former, we need to show that the corresponding limit is zero for each consecutive pair of functions.  This will require liberal application of L'Hôpital's Rule.
@@ -21,33 +21,33 @@ The Ratio Limit theorem says that $\lim_{n \rightarrow \infty} f(n)/g(n)=0 \impl
 ### i.
 
 $$
-\lim_{n \rightarrow \infty} \frac{108}{\ln{n}} = 0 \\
-\therefore O(108) \subset O(\ln{n})
+\lim_{n \rightarrow \infty} \frac{108}{\log{n}} = 0 \\
+\therefore O(108) \subset O(\log{n})
 $$
 
 ### ii.
 $$
-\lim_{n \rightarrow \infty} \frac{\ln{n}}{n} \\
+\lim_{n \rightarrow \infty} \frac{\log{n}}{n} \\
 = \lim_{n \rightarrow \infty} \frac{\frac{1}{n}}{1} \\
 = \frac{0}{1} = 0 \\
-\therefore O(\ln{n}) \subset O(n)
+\therefore O(\log{n}) \subset O(n)
 $$
 
 ### iii.
 $$
-\lim_{n \rightarrow \infty} \frac{n}{n\ln{n}} \\
-= \lim_{n \rightarrow \infty} \frac{1}{1+\ln{n}} \\
+\lim_{n \rightarrow \infty} \frac{n}{n\log{n}} \\
+= \lim_{n \rightarrow \infty} \frac{1}{1+\log{n}} \\
 = 0 \\
-\therefore O(n) \subset O(n \ln{n})
+\therefore O(n) \subset O(n \log{n})
 $$
 
 ### iv.
 $$
-\lim_{n \rightarrow \infty} \frac{n \ln{n}}{n^{2}} \\
-= \lim_{n \rightarrow \infty} \frac{1+\ln{n}}{2n} \\
+\lim_{n \rightarrow \infty} \frac{n \log{n}}{n^{2}} \\
+= \lim_{n \rightarrow \infty} \frac{1+\log{n}}{2n} \\
 = \lim_{n \rightarrow \infty} \frac{\frac{1}{n}}{2} \\
 = \frac{0}{2} = 0 \\
-\therefore O(n \ln{n}) \subset O(n^{2})
+\therefore O(n \log{n}) \subset O(n^{2})
 $$
 
 ### v.
@@ -61,9 +61,9 @@ $$
 ### vi.
 $$
 \lim_{n \rightarrow \infty} \frac{n^{3}}{2^{n}} \\
-= \lim_{n \rightarrow \infty} \frac{3n^{2}}{2^{n} \ln{2}} \\
-= \lim_{n \rightarrow \infty} \frac{6n}{2^{n} \ln^{2}{2}} \\
-= \lim_{n \rightarrow \infty} \frac{6}{2^{n} \ln^{3}{2}} \\
+= \lim_{n \rightarrow \infty} \frac{3n^{2}}{2^{n} \log{2}} \\
+= \lim_{n \rightarrow \infty} \frac{6n}{2^{n} \log^{2}{2}} \\
+= \lim_{n \rightarrow \infty} \frac{6}{2^{n} \log^{3}{2}} \\
 = 0 \\
 \therefore O(n^{3}) \subset O(2^{n})
 $$
@@ -78,40 +78,40 @@ $$
 
 ## 3. Exercise 3.26
 
-**Problem**: Obtain a formula for the order of $S(n) = \sum_{i=1}^{n}(\ln{i})^{2}$.
+**Problem**: Obtain a formula for the order of $S(n) = \sum_{i=1}^{n}(\log{i})^{2}$.
 
-We start by showing that $S(n) \in O(n \ln^{2}{n})$.
+We start by showing that $S(n) \in O(n \log^{2}{n})$.
 $$
-S(n) = \sum_{i=1}^{n}(\ln{i})^{2} = \sum_{i=1}^{n}\ln^{2}{i} \\
-= \ln^{2}{1} + \ln^{2}{2} + \dots + \ln^{2}{n}
+S(n) = \sum_{i=1}^{n}(\log{i})^{2} = \sum_{i=1}^{n}\log^{2}{i} \\
+= \log^{2}{1} + \log^{2}{2} + \dots + \log^{2}{n}
 $$
-It can be shown that $f(x) = \ln^{2}x$ has a global minimum as $x=1$ and is increasing for $x\geq1$. So it holds that $\ln^{2}a \leq \ln^{2}b$ when $1 \leq a \leq b$. It follows that,
+It can be shown that $f(x) = \log^{2}x$ has a global minimum as $x=1$ and is increasing for $x\geq1$. So it holds that $\log^{2}a \leq \log^{2}b$ when $1 \leq a \leq b$. It follows that,
 $$
-\ln^{2}{1} + \ln^{2}{2} + \dots + \ln^{2}{n}
-\leq \ln^{2}{n} + \ln^{2}{n} + \dots + \ln^{2}{n} \\
-= n \ln^{2}{n} \\
-\therefore S(n) \in O(n \ln^{2}{n})
+\log^{2}{1} + \log^{2}{2} + \dots + \log^{2}{n}
+\leq \log^{2}{n} + \log^{2}{n} + \dots + \log^{2}{n} \\
+= n \log^{2}{n} \\
+\therefore S(n) \in O(n \log^{2}{n})
 $$
-Now, we intend to show that $S(n) \in \Omega(n\ln^{2}{n})$. Let $m=\lfloor n/2 \rfloor$. Then,
+Now, we intend to show that $S(n) \in \Omega(n\log^{2}{n})$. Let $m=\lfloor n/2 \rfloor$. Then,
 $$
-S(n) = \sum_{i=1}^{n}\ln^{2}{i} = \sum_{i=1}^{m}\ln^{2}{i} + \sum_{i=m+1}^{n}\ln^{2}{i} \\
-\geq \sum_{i=m+1}^{n}\ln^{2}{i} = \ln^{2}(m+1) + \ln^{2}(m+2) + \dots + \ln^{2}{n} \\
-\geq \ln^{2}(m+1)  + \ln^{2}(m+1)  + \dots + \ln^{2}(m+1) \\
-= (n-m)\ln^{2}(m+1) \\
-\geq \frac{n}{2}\ln^{2}\left(\frac{n}{2}\right) \\
-= \frac{n}{2}\left( \ln{n} - \ln{2}\right)^{2}
+S(n) = \sum_{i=1}^{n}\log^{2}{i} = \sum_{i=1}^{m}\log^{2}{i} + \sum_{i=m+1}^{n}\log^{2}{i} \\
+\geq \sum_{i=m+1}^{n}\log^{2}{i} = \log^{2}(m+1) + \log^{2}(m+2) + \dots + \log^{2}{n} \\
+\geq \log^{2}(m+1)  + \log^{2}(m+1)  + \dots + \log^{2}(m+1) \\
+= (n-m)\log^{2}(m+1) \\
+\geq \frac{n}{2}\log^{2}\left(\frac{n}{2}\right) \\
+= \frac{n}{2}\left( \log{n} - \log{2}\right)^{2}
 $$
 
 For sufficiently large $n$,
 $$
-\frac{n}{2}\left( \ln{n} - \ln{2}\right)^{2} \geq \frac{n}{2}\left( \ln{n} - \frac{\ln{n}}{2}\right)^{2} \\
-= \frac{n}{2}\left( \frac{\ln{n}}{2}\right)^{2} \\
-= \frac{n}{8}(\ln{n})^2 \\
-= \frac{1}{8}(n\ln^{2}{n})\\
-\therefore S(n) \in \Omega(n\ln^{2}{n})
+\frac{n}{2}\left( \log{n} - \log{2}\right)^{2} \geq \frac{n}{2}\left( \log{n} - \frac{\log{n}}{2}\right)^{2} \\
+= \frac{n}{2}\left( \frac{\log{n}}{2}\right)^{2} \\
+= \frac{n}{8}(\log{n})^2 \\
+= \frac{1}{8}(n\log^{2}{n})\\
+\therefore S(n) \in \Omega(n\log^{2}{n})
 $$
 
-Since $S(n) \in O(n \ln^{2}{n})$ and $S(n) \in \Omega(n\ln^{2}{n})$, then $S(n) \in \Theta(n\ln^{2}n)$.
+Since $S(n) \in O(n \log^{2}{n})$ and $S(n) \in \Omega(n\log^{2}{n})$, then $S(n) \in \Theta(n\log^{2}n)$.
 
 ## 4. Exercise 3.37
 
