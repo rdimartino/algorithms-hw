@@ -9,6 +9,30 @@
 
 **Problem**: Give pseudocode for interpolation search, and analyze its worst-cast complexity.
 
+The idea here is to modify a Binary Search to assign `mid` the index we where would expect to find to find `X` if the elements of `L` were on a straight line from `(low,L[low])` to `(high,L[high])`. This requires solving the following:
+$$
+y-y_{1} = m(x-x_{1}) \\
+m = \frac{y_{2}-y_{1}}{x_{2}-x_{1}} \\
+y - y_{1} = \left(\frac{y_{2}-y_{1}}{x_{2}-x_{1}}\right)(x-x_{1}) \\
+x = \frac{(y-y_{1})(x_{2}-x{1})}{y_{2}-y_{1}}+x_{1}
+$$
+Where $x$ = `mid`, $x_{1}$ = `low`, $x_{2}$ = `high`, $y$ = `X`, $y_{1}$ = `L[low]`, $y_{2}$ = `L[high]`.
+
+**function** `InterpolationSearch(L[0:n-1], low, high, X)`  **recursive**
+**Input**: `L[0:n-1]`, (an array of real numbers sorted in increasing order), `X` (a search number), `low` and `high` (the lower and upper indexes to be searched)
+**Output**: returns an index of an occurence of `X` in the sublist `L[low:high]` or `-1` if `X` is not in the sublist
+
+```
+if low>high then return(-1) endif
+mid ← floor((X-L[low])*(high-low)/(L[high]-L[low]))+low
+case
+	:X = L[mid]: return(mid)
+	:X < L[mid]: return(InterpolationSearch(L[0:n-1], low, mid-1, X))
+	:default: return(InterpolationSearch(L[0:n-1], mid+1, high, X))
+endcase
+```
+The worst-case complexity for Interpolation search occurs when searching for the second to last element when the last element is much larger than the other elements in the list, e.g. searching for the index of `5` in `[1,2,3,4,5,99999]`. In this case, `mid` will be set to `low` in the interpolation step, so every index from `0` to `n-1` will be checked. This means that the worst-case complexity $W(n) \in O(n)$.
+
 ## 2. Exercise 3.6
 
 **Problem**: Using the Ratio Limit Theorem, prove the following:
