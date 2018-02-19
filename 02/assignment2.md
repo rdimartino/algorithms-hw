@@ -16,7 +16,10 @@ $$
 O(108) \subset O(\ln{n}) \subset O(n) \subset O(n \ln{n}) \subset O(n^{2}) \subset O(n^{3}) \subset O(2^{n}) \subset O(3^{n})
 $$
 
+The Ratio Limit theorem says that $\lim_{n \rightarrow \infty} f(n)/g(n)=0 \implies O(f(n)) \subset O(g(n))$. So in order to prove thie former, we need to show that the corresponding limit is zero for each consecutive pair of functions.  This will require liberal application of L'Hôpital's Rule.
+
 ### i.
+
 $$
 \lim_{n \rightarrow \infty} \frac{108}{\ln{n}} = 0 \\
 \therefore O(108) \subset O(\ln{n})
@@ -199,7 +202,7 @@ t(n) = 3^{n-1}\left( \frac{1}{4}\times\frac{1}{3^{n-1}}\times(-2n+3^{n+1}-3) \ri
 $$
 Which reduces to:
 $$
-t(n) = \frac{1}{4}\times(-2n+3^{n+1}-3)
+t(n) = \frac{1}{4}(-2n+3^{n+1}-3)
 $$
 
 
