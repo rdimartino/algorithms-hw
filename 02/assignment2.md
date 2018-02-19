@@ -185,32 +185,32 @@ Because of the additional implementation complexity of `TriMergeSort`, `MergeSor
 
 To measure the complexity of Insertion Sort we consider the number of operations it takes to scan the list and shift elements in the list as appropriate.
 
-For a list of size $n=1$, the list is already sorted and it requires no further operations. This gives us our initial condition: $t(1)=0$.
+For a list of size $n=1$, the list is already sorted and it requires no further operations. This gives us our initial condition: $W(1)=0$.
 
 In a list that is sorted in reverse order, we have to scan and shift the entire remaining list to move the element to the start of the list. This is the worst case for Insertion Sort.
 
-To measure the complexity of this worst case scenario, we can consider a recursive implementation of Insertion Sort. For a list of size $n$, it would take $n-1$ scans and shifts of the elements to put the last element in the list in the first position. Then the we still need to recursively perform Insertion Sort with second to last element in the list. This gives us the recurrence relation: $t(n) = t(n-1) + n-1$.
+To measure the complexity of this worst case scenario, we can consider a recursive implementation of Insertion Sort. For a list of size $n$, it would take $n-1$ scans and shifts of the elements to put the last element in the list in the first position. Then the we still need to recursively perform Insertion Sort with second to last element in the list. This gives us the recurrence relation: $W(n) = W(n-1) + n-1$.
 
 To solve this recurrence relation:
 $$
-t(n) = t(n-1) + n - 1 \\
-t(n) = (t(n-2)+(n-1)-1) + n - 1 \\
-=t(n-2)+n-2+n-1 \\
-t(n) = (t(n-3)+(n-2)-1)+n-2+n-1 \\
-=t(n-3)+n-3+n-2+n-1 \\
+W(n) = W(n-1) + n - 1 \\
+W(n) = (W(n-2)+(n-1)-1) + n - 1 \\
+=W(n-2)+n-2+n-1 \\
+W(n) = (W(n-3)+(n-2)-1)+n-2+n-1 \\
+=W(n-3)+n-3+n-2+n-1 \\
 \vdots \\
-t(n) = t(n-k) + (n-k) + (n-k+1) + \dots + (n-2) + (n-1)
+W(n) = W(n-k) + (n-k) + (n-k+1) + \dots + (n-2) + (n-1)
 $$
 When $k=n$,
 $$
-t(n) =t(0)+0+1+2+\dots+(n-2)+(n-1) \\
+W(n) =W(0)+0+1+2+\dots+(n-2)+(n-1) \\
 $$
-Applying the initial condition, $t(0)=0$,
+Applying the initial condition, $W(0)=0$,
 $$
-t(n) = 0+0+1+2+\dots+(n-2)+(n-1) \\
-t(n) = \sum_{i=0}^{n-1}i \\
-t(n) = \frac{n(n-1)}{2} \\
-t(n) = \frac{1}{2}(n^{2}-n)
+W(n) = 0+0+1+2+\dots+(n-2)+(n-1) \\
+W(n) = \sum_{i=0}^{n-1}i \\
+W(n) = \frac{n(n-1)}{2} \\
+W(n) = \frac{1}{2}(n^{2}-n)
 $$
 
 
