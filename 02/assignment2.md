@@ -124,6 +124,37 @@ Since $S(n) \in O(n \ln^{2}{n})$ and $S(n) \in \Omega(n\ln^{2}{n})$, then $S(n) 
 ## 5.
 **Problem**: Consider the sorting algorithm Insertion Sort for sorting a list `L[0:n – 1]`. **Derive** a recurrence relation for the worst-case complexity $W(n)$ and **solve**.
 
+To measure the complexity of Insertion Sort we consider the number of operations it takes to scan the list and shift elements in the list as appropriate.
+
+For a list of size $n=1$, the list is already sorted and it requires no further operations. This gives us our initial condition: $t(1)=0$.
+
+In a list that is sorted in reverse order, we have to scan and shift the entire remaining list to move the element to the start of the list. This is the worst case for Insertion Sort.
+
+To measure the complexity of this worst case scenario, we can consider a recursive implementation of Insertion Sort. For a list of size $n$, it would take $n-1$ scans and shifts of the elements to put the last element in the list in the first position. Then the we still need to recursively perform Insertion Sort with second to last element in the list. This gives us the recurrence relation: $t(n) = t(n-1) + n-1$.
+
+To solve this recurrence relation:
+$$
+t(n) = t(n-1) + n - 1 \\
+t(n) = (t(n-2)+(n-1)-1) + n - 1 \\
+=t(n-2)+n-2+n-1 \\
+t(n) = (t(n-3)+(n-2)-1)+n-2+n-1 \\
+=t(n-3)+n-3+n-2+n-1 \\
+\vdots \\
+t(n) = t(n-k) + (n-k) + (n-k+1) + \dots + (n-2) + (n-1)
+$$
+When $k=n$,
+$$
+t(n) =t(0)+0+1+2+\dots+(n-2)+(n-1) \\
+$$
+Applying the initial condition, $t(0)=0$,
+$$
+t(n) = 0+0+1+2+\dots+(n-2)+(n-1) \\
+t(n) = \sum_{i=0}^{n-1}i \\
+t(n) = \frac{n(n-1)}{2} \\
+t(n) = \frac{1}{2}(n^{2}-n)
+$$
+
+
 ## 6. Exercise 3.35
 **Problem**: Solve the following recurrence relations
 
