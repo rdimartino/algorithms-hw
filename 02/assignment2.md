@@ -142,11 +142,43 @@ Since $S(n) \in O(n \log^{2}{n})$ and $S(n) \in \Omega(n\log^{2}{n})$, then $S(n
 ### a.
 **Problem**: Give a recurrence relation for the worst-case complexity $W(n)$ of `TriMergeSort` for an input list of size $n$.
 
+The worst-case complexity of `TriMergeSort` will be similar to the worst-case complexity of `MergeSort`, which is $W(n)=2W(n/2)+n-1$.
+
+The $2W(n/2)$ term comes from the fact that we recursively call `MergeSort` twice, once for each half of the list, i.e. $n/2$ elements. `TriMergeSort` recursively calls `TriMergeSort` 3 times, once for each third of the list. The corresponding term in the worst-case complexity then is $3W(n/3)$.
+
+The last part of the worst-case complexity for `MergeSort` comes from the worse-case complexity of `merge` for $n$ elements, which is $n-1$. `TriMergeSort` calls `merge` twice, once for the first two-thirds of the list, then again for the whole list. That means the worse-case complexity for both calls to `merge` in `TriMergeSort` is $(2n/3-1)+(n-1)=5n/3-2$.
+
+Then, for `TriMergeSort` the worse-case complexity is $W(n) = 3W(n/3) + \frac{5}{3}n - 2$.
+
 ### b.
 **Problem**: Solve the recurrence formula you have given in (a) to obtain an explicit formula for the worst-case complexity $W(n)$ of `TriMergeSort`.
 
+The initial condition for `TriMergeSort` is the same as for `MergeSort`. A list of 1 element is already sorted, therefore $W(1) = 0$.
+
+Assume that $n=3^k$ for some positive integer $k$. Then
+$$
+W(n) = 3W(n/3) + \frac{5}{3}n - 2 \\
+W(n) = 3\left( 3(W(n/3^{2}) + \frac{5n}{3^{2}} - 2 \right) + \frac{5}{3}n - 2 \\
+= 3^{2}W(n/3^{2}) + \frac{5}{3}n - 6 + \frac{5}{3}n -2 \\
+= 3^{2}W(n/3^{2}) + 2\times\frac{5}{3}n - (2+3\times2) \\
+W(n) = 3^{2}(3W(n/3^{3}) + \frac{5n}{3^3} - 2) + 2\times\frac{5}{3}n - (2+3\times2) \\
+= 3^{3}W(n/3^{3})+3\times\frac{5}{3}n-2(1+3+3^{2}) \\
+\vdots \\
+W(n) = 3^{k}W(n/3^{k})+\frac{5}{3}kn-2(1+3+3^{2}+\dots+3^{k-1}) \\
+= 3^{k}W(1)+\frac{5}{3}kn-2(1+3+3^{2}+\dots+3^{k-1}) \\
+= \frac{5}{3}kn - 2(3^{k}-1)
+$$
+Since $k = \log_{3}{n}$, we have
+$$
+W(n) = \frac{5}{3}n\log_{3}{n} - 2n-2
+$$
+
 ### c.
 **Problem**: Which is more efficient in the worst case, `MergeSort` or `TriMergeSort`? Discuss.
+
+The asymptotic behavior of `MergeSort` and `TriMergeSort` is similar. For sufficiently large $n$, the $n\log_{2}{n}$ and the $n\log_{3}{n}$ terms, respectively, dominant the growth of the worst-case complexities. We also recall that the change of base for logarithms is a constant, which implies that $n\log_{a}{n} \in \Theta(n\log{n})$ for any base $a>1$. Therefore, despite the different bases, `MergeSort` and `TriMergeSort` are both order $n\log{n}$.
+
+Because of the additional implementation complexity of `TriMergeSort`, `MergeSort` should be preferred.
 
 ## 5.
 **Problem**: Consider the sorting algorithm Insertion Sort for sorting a list `L[0:n – 1]`. **Derive** a recurrence relation for the worst-case complexity $W(n)$ and **solve**.
