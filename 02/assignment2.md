@@ -199,3 +199,195 @@ Which reduces to:
 $$
 t(n) = \frac{1}{3}(4^{n}\times11 - 5)
 $$
+
+## 7. Exercise 3.43
+
+### a.
+
+**Problem**: Prove by induction that
+$$
+\begin{pmatrix}
+fib(n) \\
+fib(n+1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix}
+$$
+Start with the base case when $n=0$. We want to show that $fib(0)=0$ and $fib(1)=1$. Note, for matrix $A$, $A^{0}=I$, where $I$ is the identity matrix:
+$$
+\begin{pmatrix}
+fib(0)  \\
+fib(1)
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{0}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+=
+\begin{pmatrix}
+1\times0 +0\times1  \\
+0\times0 +1\times1
+\end{pmatrix}
+=
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+\therefore fib(0)=0, fib(1)=1
+$$
+Then, for the induction step, assume the claim is true for $n-2$, i.e.:
+$$
+\begin{pmatrix}
+fib(n-2) \\
+fib(n-1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n-2}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix}
+$$
+Then:
+$$
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{2}
+\begin{pmatrix}
+fib(n-2) \\
+fib(n-1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{2}
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n-2}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+fib(n-2) \\
+fib(n-1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+
+\begin{pmatrix}
+0\times0+1\times1 & 0\times1+1\times1 \\
+1\times0+1\times1 & 1\times1+1\times1
+\end{pmatrix}
+\begin{pmatrix}
+fib(n-2) \\
+fib(n-1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+
+\begin{pmatrix}
+1 & 1 \\
+1 & 2
+\end{pmatrix}
+\begin{pmatrix}
+fib(n-2) \\
+fib(n-1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+
+\begin{pmatrix}
+fib(n-2)+fib(n-1) \\
+fib(n-2)+2fib(n-1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix} \\
+$$
+By definition, we have $fib(n)=fib(n-2)+fib(n-1)$, and it easy to show that the following is true.
+
+$$
+fib(n+1)=fib(n-2)+2fib(n-1) \\
+=fib(n-2)+fib(n-1)+fib(n-1) \\
+=fib(n-1)+fib(n)
+$$
+Therefore,
+$$
+\begin{pmatrix}
+fib(n) \\
+fib(n+1)
+\end{pmatrix}=
+\begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}^{n}
+\begin{pmatrix}
+0  \\
+1
+\end{pmatrix}
+$$
+
+### b.
+
+**Problem**: Briefly describe how the preceding formula can be employed to design an algorithm for computing $fib(n)$ using only at most $8\log_{2}{n}$ multiplications.
+
+Assume that $n = 2^{k}$. Then the exponentiated matrix, $\begin{pmatrix}0 & 1 \\1 & 1\end{pmatrix}^{n}$, can be calculated using a modified version of the recursive`Powers` algorithm based on the left-to-right binary method.  The `Powers` algorithm uses $\log_{2}{n}$ multiplications to compute $x^{n}$. A key difference here is that we are doing matrix multiplication, which requires 8 multiplications to do one matrix multiplication (2 multiplications for each cell in a 2x2 matrix).
+
+ The value of $fib(n)$ is computed when the power on the matrix term is $n-1$, it is the value in the lower cell of the resulting matrix product. This means the exponentiated matrix can be calculated with $8\log_{2}(n-1)$ multiplications. But it takes another four multiplication steps to multiply by that matrix by $\begin{pmatrix}0 \\ 1\end{pmatrix}$, therefore it takes at most $8\log_{2}{n}$ multiplications to calculate $fib(n)$.
