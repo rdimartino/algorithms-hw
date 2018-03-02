@@ -166,11 +166,11 @@ W(n) = 3^{2}(3W(n/3^{3}) + \frac{5n}{3^3} - 2) + 2\times\frac{5}{3}n - (2+3\time
 \vdots \\
 W(n) = 3^{k}W(n/3^{k})+\frac{5}{3}kn-2(1+3+3^{2}+\dots+3^{k-1}) \\
 = 3^{k}W(1)+\frac{5}{3}kn-2(1+3+3^{2}+\dots+3^{k-1}) \\
-= \frac{5}{3}kn - 2(3^{k}-1)
+= \frac{5}{3}kn - 2\frac{3^{k}-1}{2}
 $$
 Since $k = \log_{3}{n}$, we have
 $$
-W(n) = \frac{5}{3}n\log_{3}{n} - 2n-2
+W(n) = \frac{5}{3}n\log_{3}{n} - n+1
 $$
 
 ### c.
