@@ -3,8 +3,15 @@
 #include <string.h>
 #include <queue>
 #include <vector>
+#include <list>
 
 using namespace std;
+
+struct package{	// Helper structure.  This is the return type of the BFS function.
+	bool connected;
+	int maxDist = 0;
+	list<int> connectedList;
+};
 
 class Graph {
 public:
@@ -59,19 +66,18 @@ Graph* createGraph(queue<int>& input) {
 	return G;
 };
 
-void BFS(Graph* G, int v) {	// G is the graph to search, v is the starting node.
+package BFS(Graph* G, int v) {	// G is the graph to search, v is the starting node.
 	int size = G->size;
 	if (v >= size) {
 		cout << "that vertex is not in the graph" << endl;
-		return;
 	}
+	
 	queue<int> Q;
 	int Visited[G->size] = {0};
 	int d[size] = {0};
 	
 	Q.push(v);
 	Visited[v] = 1;
-	cout << v << endl;
 	int distance = 0;
 	int u;
 	int w;
@@ -86,15 +92,59 @@ void BFS(Graph* G, int v) {	// G is the graph to search, v is the starting node.
 					d[w] = distance;
 					Q.push(w);
 					Visited[w] = 1;
-					cout << w << endl;
 				}
 			}
 		}
 	}
+	
+	// Gather data to return
+	package data;
+	bool connected = true;
+	for(int i = 0; i < size; i++) {
+		if (Visited[i] == 0){
+			connected = false;
+		}
+		else{
+			data.connectedList.push_front(i);
+		}
+		if(data.maxDist < d[i] ){
+			data.maxDist = d[i];
+		}
+	}
+	data.connected = connected;
+	return data;
 };
 
-Diameter(Graph* G) {
-	
+int diameter(Graph* G) {
+	int size = G->size;
+	int diameter = 0;
+	package p;
+	for (int i = 0; i < size; i++) {
+		p = BFS(G, i);
+		if(!p.connected) {return -1;}
+		if(diameter < p.maxDist) {diameter = p.maxDist;}
+	}
+	return diameter;
+};
+
+void components(Graph* G) {
+	int size = G->size;
+	int discovered[size] = {0};
+	int vertex;
+	package data;
+	for(int i = 0; i < size; i++) {
+		if(discovered[i] == 0) {
+			data = BFS(G, i);
+			cout << "Group " << i << " contains vertices: ";
+			while(!data.connectedList.empty()){
+				vertex = data.connectedList.front();
+				cout << vertex << ", ";
+				data.connectedList.pop_front();
+				discovered[vertex] = 1;
+			}
+			
+		}
+	}
 };
 
 void displayHelp() {
@@ -174,7 +224,14 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 	G->printMatrix();
-	BFS(G, 3);
+	
+	int diam = diameter(G);
+	if(diam == -1){
+		cout << "Graph is not connected" << endl;
+		components(G);
+	}
+	else{cout << "Diameter is: " << diam << endl;}
+
 
 
 	return EXIT_SUCCESS;
