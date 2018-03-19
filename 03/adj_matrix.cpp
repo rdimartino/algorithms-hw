@@ -3,15 +3,8 @@
 #include <string.h>
 #include <queue>
 #include <vector>
-#include <list>
 
 using namespace std;
-
-struct package{	// Helper structure.  This is the return type of the BFS function.
-	bool connected;
-	int maxDist = 0;
-	list<int> connectedList;
-};
 
 class Graph {
 public:
@@ -29,6 +22,7 @@ public:
 		matrix[a][b] = 1;
 		matrix[b][a] = 1;
 	}
+	// Utility method to print the adjacency matrix
 	void printMatrix() {
 		cout << "[";
 		for(int i=0; i<size; i++) {
@@ -39,7 +33,6 @@ public:
 		}
 		cout << "]" << endl;
 	}
-
 };
 
 Graph* createGraph(queue<int>& input) {
@@ -66,27 +59,26 @@ Graph* createGraph(queue<int>& input) {
 	return G;
 };
 
-package BFS(Graph* G, int v) {	// G is the graph to search, v is the starting node.
+vector<int> BFS(Graph* G, int v) {	// G is the graph to search, v is the starting node.
 	int size = G->size;
-	if (v >= size) {
-		cout << "that vertex is not in the graph" << endl;
-	}
-	
+	if (v >= size)
+	throw "Vertex not included in the graph";
+
 	queue<int> Q;
-	int Visited[G->size] = {0};
-	int d[size] = {0};
-	
+	vector<int> Visited(size);
+	vector<int> d(size, -1);
+
 	Q.push(v);
 	Visited[v] = 1;
+	d[v] = 0;
 	int distance = 0;
-	int u;
-	int w;
+	int u, w;
 	while(!Q.empty()){
 		u = Q.front();
 		Q.pop();
 		distance ++;
 		for(int i = 0; i < size; i++) {
-			if (G->matrix[u][i] == 1){ 
+			if (G->matrix[u][i] == 1){
 				w = i;
 				if (Visited[w] == 0){
 					d[w] = distance;
@@ -96,55 +88,65 @@ package BFS(Graph* G, int v) {	// G is the graph to search, v is the starting no
 			}
 		}
 	}
-	
-	// Gather data to return
-	package data;
-	bool connected = true;
-	for(int i = 0; i < size; i++) {
-		if (Visited[i] == 0){
-			connected = false;
-		}
-		else{
-			data.connectedList.push_front(i);
-		}
-		if(data.maxDist < d[i] ){
-			data.maxDist = d[i];
-		}
-	}
-	data.connected = connected;
-	return data;
+	return d;
 };
 
-int diameter(Graph* G) {
+int vMax(vector<int> v) {
+	int max = v[0];
+	for (int i=1; i<v.size(); i++) {
+		if (max < v[i])
+		max = v[i];
+	}
+	return max;
+}
+
+bool vContains(vector<int> v, int item) {
+	for(int i=0; i<v.size(); i++) {
+		if (v[i] == item)
+		return true;
+	}
+	return false;
+}
+
+int Diameter(Graph* G) {
 	int size = G->size;
-	int diameter = 0;
-	package p;
+	int diameter = 0, d = 0;
+	vector<int> distances;
 	for (int i = 0; i < size; i++) {
-		p = BFS(G, i);
-		if(!p.connected) {return -1;}
-		if(diameter < p.maxDist) {diameter = p.maxDist;}
+		distances = BFS(G, i);
+		if (vContains(distances, -1))
+		return -1;
+
+		d = vMax(distances);
+		if(diameter < d)
+		diameter = d;
 	}
 	return diameter;
 };
 
-void components(Graph* G) {
+vector< vector<int> > Components(Graph* G) {
 	int size = G->size;
-	int discovered[size] = {0};
-	int vertex;
-	package data;
-	for(int i = 0; i < size; i++) {
+	vector<int> discovered(size);
+	vector<int> distances;
+
+	vector< vector<int> > components;
+	vector<int> component;
+
+	for (int i=0; i < size; i++) {
 		if(discovered[i] == 0) {
-			data = BFS(G, i);
-			cout << "Group " << i << " contains vertices: ";
-			while(!data.connectedList.empty()){
-				vertex = data.connectedList.front();
-				cout << vertex << ", ";
-				data.connectedList.pop_front();
-				discovered[vertex] = 1;
+			component.resize(0);
+			distances = BFS(G, i);
+			for (int j=0; j < distances.size(); j++) {
+				if (distances[j] >= 0) {
+					discovered[j] = 1;
+					component.push_back(j);
+				}
 			}
-			
+			components.push_back(component);
 		}
 	}
+
+	return components;
 };
 
 void displayHelp() {
@@ -215,24 +217,34 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
-	// Build graph from input
 	try {
+		// Build graph from input
 		G = createGraph(input);
+
+		// Print results
+		cout << "Adjacency matrix:" << endl;
+		G->printMatrix();
+
+		int diam = Diameter(G);
+		if (diam > -1) {
+			cout << "Diameter: " << diam << endl;
+		} else {
+			cout << "Graph is not connected" << endl;
+			cout << "Components:" << endl;
+			vector< vector<int> > components = Components(G);
+			for (int i=0; i<components.size(); i++) {
+				cout << "{";
+				for (int j=0; j<components[i].size(); j++) {
+					cout << components[i][j] << ", ";
+				}
+				cout << "}" << endl;
+			}
+		}
 	}
 	catch(const char* msg) {
 		cerr << "Error: " << msg << endl << endl;
 		return EXIT_FAILURE;
 	}
-	G->printMatrix();
-	
-	int diam = diameter(G);
-	if(diam == -1){
-		cout << "Graph is not connected" << endl;
-		components(G);
-	}
-	else{cout << "Diameter is: " << diam << endl;}
-
-
 
 	return EXIT_SUCCESS;
 }
