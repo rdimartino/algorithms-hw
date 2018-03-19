@@ -299,7 +299,7 @@ int main(int argc, char* argv[])
 			vector< vector<int> > components = Components(G);
 			int cSize = 0;
 			for (int i=0; i<components.size(); i++) {
-				cout << "{";
+				cout << i << ": {";
 				cSize = components[i].size();
 				for (int j=0; j<cSize; j++) {
 					cout << components[i][j] << (j < cSize-1 ? ", " : "");
