@@ -6,6 +6,41 @@
 
 using namespace std;
 
+//
+// Utility functions
+//
+
+// vectorMax
+// Input: vector v
+// Returns value of max item of a vector
+template <class T>
+T vectorMax(vector<T> v) {
+	int max = v[0];
+	for (int i=1; i<v.size(); i++) {
+		if (max < v[i]) {
+			max = v[i];
+		}
+	}
+	return max;
+}
+
+// vectorContains
+// Inputs: vector v, item
+// Return true if v contains item, false otherwise
+template <class T>
+bool vectorContains(vector<T> v, T item) {
+	for (int i=0; i<v.size(); i++) {
+		if (v[i] == item) {
+			return true;
+		}
+	}
+	return false;
+}
+
+//
+// Graph class
+//
+
 class Graph {
 public:
 	int size;
@@ -44,8 +79,8 @@ public:
 };
 
 // createGraph
-// Input: vector of int instructions. The instructions specification is
-// in the program help, run with '--help' or '-h'.
+// Input: vector of int instructions. The instructions specification is in the
+// program help, run with '--help' or '-h'.
 // Output: Graph object G
 Graph* createGraph(queue<int>& input) {
 	// Check that a size was provided and is valid
@@ -113,35 +148,6 @@ vector<int> BFS(Graph* G, int v) {
 	return d;
 };
 
-// Utility functions
-
-// vectorMax
-// Input: vector v
-// Returns value of max item of a vector
-template <class T>
-T vectorMax(vector<T> v) {
-	int max = v[0];
-	for (int i=1; i<v.size(); i++) {
-		if (max < v[i]) {
-			max = v[i];
-		}
-	}
-	return max;
-}
-
-// vectorContains
-// Inputs: vector v, item
-// Return true if v contains item, false otherwise
-template <class T>
-bool vectorContains(vector<T> v, T item) {
-	for (int i=0; i<v.size(); i++) {
-		if (v[i] == item) {
-			return true;
-		}
-	}
-	return false;
-}
-
 // Diameter
 // Input: Graph object G
 // Output: Diameter of G if G is connected, -1 otherwise
@@ -149,8 +155,12 @@ int Diameter(Graph* G) {
 	int size = G->size;
 	int diameter = 0, d = 0;
 	vector<int> distances;
+	// For each node  in G, find the max distance from that node to every other.
+	// Update diameter if distance from the node is greater than the current max.
 	for (int i = 0; i < size; i++) {
 		distances = BFS(G, i);
+		// Distances are initialized to -1
+		// If any distance is still -1, the Graph is not connected.
 		if (vectorContains(distances, -1)) {
 			return -1;
 		}
@@ -164,8 +174,8 @@ int Diameter(Graph* G) {
 
 // Components
 // Input: Graph object G
-// Output: Vector of int vectors of the indices for each connected
-// component in G
+// Output: Vector of vectors of the indices for each node in each connected
+// component in G.
 vector< vector<int> > Components(Graph* G) {
 	int size = G->size;
 	vector<int> discovered(size);
@@ -174,22 +184,31 @@ vector< vector<int> > Components(Graph* G) {
 	vector< vector<int> > components;
 	vector<int> component;
 
+	// For each node in G, use BFS to find the connected components
 	for (int i=0; i < size; i++) {
+		// Only perform BFS on undiscovered nodes.
 		if (discovered[i] == 0) {
 			component.resize(0);
 			distances = BFS(G, i);
+			// All nodes with non-zero distance are in the same connected component.
+			// Add the nodes to the component and flag the nodes as discovered.
 			for (int j=0; j < distances.size(); j++) {
 				if (distances[j] >= 0) {
 					discovered[j] = 1;
 					component.push_back(j);
 				}
 			}
+			// Add the component to the vector of components
 			components.push_back(component);
 		}
 	}
 
 	return components;
 };
+
+//
+// Help
+//
 
 // displayHelp
 void displayHelp() {
