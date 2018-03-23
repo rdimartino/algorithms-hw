@@ -1,10 +1,14 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string.h>
 #include <queue>
 #include <vector>
 
 using namespace std;
+
+// Assignment 4, CS 4071, Spring 2018
+// Group 13: Robert DiMartino, Jeremiah Leak, Hayden Schiff
 
 //
 // Utility functions
@@ -212,9 +216,9 @@ vector< vector<int> > Components(Graph* G) {
 
 // displayHelp
 void displayHelp() {
-	cout << "usage: graphTool [-h|--help] filename" << endl << endl;
+	cout << "usage: graphTool [-h|--help] [filename]" << endl << endl;
 	cout << "  -h | --help : print usage instructions" << endl;
-	cout << "     filename : name of file containing graph input" << endl << endl;
+	cout << "     filename : name of file containing graph input (uses test input if no filename given)" << endl << endl;
 	cout << "graph file input format: n edges... q" << endl << endl;
 	cout << "      n : number of vertices" << endl;
 	cout << "  edges : zero or more pairs of whitespace delimited vertices between 0 and n-1" << endl;
@@ -239,25 +243,30 @@ int main(int argc, char* argv[])
 	Graph* G;
 
 	try {
-		// Not passed enough arguments or passed help option
-		if (argc < 2) {
-			throw "No filename provided";
-		}
-		// Exit if help option provided
-		if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
-			displayHelp();
-			return EXIT_SUCCESS;
-		}
 
-		// Open input file as stream
-		ifstream graphFile(argv[1]);
 		string word;
 		int num;
-		if (!graphFile) {
-			throw "Provided file does not exist";
+		istream *graphInput;
+
+		// Use default string input if no filename given
+		if (argc < 2) {
+			string defaultInput = "5  0  1  1  4  2  3  1  3  3  4  -1";
+			graphInput = new istringstream(defaultInput);
+		} else {
+			// Exit if help option provided
+			if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
+				displayHelp();
+				return EXIT_SUCCESS;
+			}
+
+			// Open input file as stream
+			graphInput = new ifstream(argv[1]);
+			if (!graphInput) {
+				throw "Provided file does not exist";
+			}
 		}
 		// Add ints to input queue until sentinel integer or EOF
-		while(graphFile >> word) {
+		while((*graphInput) >> word) {
 			num = stoi(word);
 			if (num < 0) {
 				break;
