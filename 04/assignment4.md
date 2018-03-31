@@ -63,8 +63,8 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
 	```mermaid
     graph TD
         %% stage 1
-        n1((4))---|0|f:2
-        n1---|1|h:2
+        n1((4))---f:2
+        n1---h:2
 
         %% unallocated
         a:10
@@ -81,11 +81,11 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
     ```mermaid
     graph TD
         %% stage 1
-        n1((4))---|0|f:2
-        n1---|1|h:2
+        n1((4))---f:2
+        n1---h:2
         %% stage 2
-        n2((6))---|0|c:3
-        n2---|1|g:3
+        n2((6))---c:3
+        n2---g:3
 
         %% unallocated
         a:10
@@ -99,15 +99,15 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
     ```mermaid
     graph TD
         %% stage 1
-        n1((4))---|0|f:2
-        n1---|1|h:2
+        n1((4))---f:2
+        n1---h:2
         %% stage 3
-        n3((9))---|0|n1
-        n3---|1|d:5
+        n3((9))---n1
+        n3---d:5
 
         %% stage 2
-        n2((6))---|0|c:3
-        n2---|1|g:3
+        n2((6))---c:3
+        n2---g:3
 
         %% unallocated
         a:10
@@ -120,18 +120,18 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
     ```mermaid
     graph TD
         %% stage 1
-        n1((4))---|0|f:2
-        n1---|1|h:2
+        n1((4))---f:2
+        n1---h:2
         %% stage 3
-        n3((9))---|0|n1
-        n3---|1|d:5
+        n3((9))---n1
+        n3---d:5
 
         %% stage 2
-        n2((6))---|0|c:3
-        n2---|1|g:3
+        n2((6))---c:3
+        n2---g:3
         %% stage 4
-        n4((13))---|0|n2
-        n4---|1|b:7
+        n4((13))---n2
+        n4---b:7
 
         %% unallocated
         a:10
@@ -144,21 +144,21 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
     graph TD
 
         %% stage 1
-        n1((4))---|0|f:2
-        n1---|1|h:2
+        n1((4))---f:2
+        n1---h:2
         %% stage 3
-        n3((9))---|0|n1
-        n3---|1|d:5
+        n3((9))---n1
+        n3---d:5
         %% stage 5
-        n5((18))---|0|n3
-        n5---|1|e:10
+        n5((18))---n3
+        n5---e:10
 
         %% stage 2
-        n2((6))---|0|c:3
-        n2---|1|g:3
+        n2((6))---c:3
+        n2---g:3
         %% stage 4
-        n4((13))---|0|n2
-        n4---|1|b:7
+        n4((13))---n2
+        n4---b:7
 
         %% unallocated
         a:10
@@ -169,24 +169,24 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
     ```mermaid
     graph TD
         %% stage 1
-        n1((4))---|0|f:2
-        n1---|1|h:2
+        n1((4))---f:2
+        n1---h:2
         %% stage 3
-        n3((9))---|0|n1
-        n3---|1|d:5
+        n3((9))---n1
+        n3---d:5
         %% stage 5
-        n5((18))---|0|n3
-        n5---|1|e:10
+        n5((18))---n3
+        n5---e:10
         %% stage 6
-        n6((23))---|0|n4
-        n6---|1|a:10
+        n6((23))---n4
+        n6---a:10
 
         %% stage 2
-        n2((6))---|0|c:3
-        n2---|1|g:3
+        n2((6))---c:3
+        n2---g:3
         %% stage 4
-        n4((13))---|0|n2
-        n4---|1|b:7
+        n4((13))---n2
+        n4---b:7
     ```
 
 7. Stage 7: Huffman Tree
@@ -194,26 +194,26 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
     ```mermaid
     graph TD
         %% stage 1
-        n1((4))---|0|f:2
-        n1---|1|h:2
+        n1((4))---|0| f:2
+        n1---|1| h:2
         %% stage 3
-        n3((9))---|0|n1
-        n3---|1|d:5
+        n3((9))---|0| n1
+        n3---|1| d:5
         %% stage 5
-        n5((18))---|0|n3
-        n5---|1|e:10
+        n5((18))---|0| n3
+        n5---|1| e:10
         %% stage 6
-        n6((23))---|0|n4
-        n6---|1|a:10
+        n6((23))---|0| n4
+        n6---|1| a:10
         %% stage 2
-        n2((6))---|0|c:3
-        n2---|1|g:3
+        n2((6))---|0| c:3
+        n2---|1| g:3
         %% stage 4
-        n4((13))---|0|n2
-        n4---|1|b:7
+        n4((13))---|0| n2
+        n4---|1| b:7
         %% stage 7
-        n7((41))---|0|n5
-        n7---|1|n6
+        n7((41))---|0| n5
+        n7---|1| n6
     ```
 
 | letter | frequency | encoding |
