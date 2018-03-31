@@ -18,9 +18,9 @@ To solve this knapsack problem, we want to greedily select objects of decreasing
 
 |      $i$      |  0   |  1   |  2   |  3   |  4   |  5   |  6   |  7   |
 | :-----------: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| $f_{i} = v_{i}/w_{i}$ |  2   | 0.5  |  4   |  3   | 2.5  | 1.25 |  5   |  1   |
+| $d_{i} = v_{i}/w_{i}$ |  2   | 0.5  |  4   |  3   | 2.5  | 1.25 |  5   |  1   |
 
-Then we repeatedly select the next available object with the highest density until the knapsack is full (or we run out of items).
+Then we repeatedly select available objects with the next highest density until the knapsack is full (or we run out of items).
 
 0. Starting capacity: 30
 1. Select: 6 ($d=5, w=1$), fraction: 1, remaining capacity: 29
