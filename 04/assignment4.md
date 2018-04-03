@@ -380,9 +380,123 @@ Consider the following weighted graph G.:
 
 **Problem**: Trace the action of procedure Dijkstra for the digraph with initial vertex $r = 2$.
 
+0. Stage 0
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|inf|13|0|3|inf|9|
+  |parent[i]|-|2|-1|2|-|2|
+  |inTree[i]|F|F|T|F|F|F|
+  ![Stage 0 diagram](dijkstra-r2-stage-0.png)
+
+
+1. Stage 1
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|inf|13|0|3|4|9|
+  |parent[i]|-|2|-1|2|3|2|
+  |inTree[i]|F|F|T|T|F|F|
+  ![Stage 1 diagram](dijkstra-r2-stage-1.png)
+
+
+2. Stage 2
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|inf|13|0|3|4|8|
+  |parent[i]|-|2|-1|2|3|4|
+  |inTree[i]|F|F|T|T|T|F|
+  ![Stage 2 diagram](dijkstra-r2-stage-2.png)
+
+
+3. Stage 3
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|9|13|0|3|4|8|
+  |parent[i]|5|2|-1|2|3|4|
+  |inTree[i]|F|F|T|T|T|T|
+  ![Stage 3 diagram](dijkstra-r2-stage-3.png)
+
+
+4. Stage 4
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|9|12|0|3|4|8|
+  |parent[i]|5|0|-1|2|3|4|
+  |inTree[i]|T|F|T|T|T|T|
+  ![Stage 4 diagram](dijkstra-r2-stage-4.png)
+
+
+5. Stage 5
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|9|12|0|3|4|8|
+  |parent[i]|5|0|-1|2|3|4|
+  |inTree[i]|T|T|T|T|T|T|
+  ![Stage 5 diagram](dijkstra-r2-stage-5.png)
+
+Minimum spanning path:
+
+![Minimum spanning path](dijkstra-r2-result.png)
+
 ### b)
 
 **Problem**: Repeat for $r = 3$.
+
+0. Stage 0
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|inf|inf|inf|0|1|inf|
+  |parent[i]|-|-|-|-1|3|-|
+  |inTree[i]|F|F|F|T|F|F|
+  ![Stage 0 diagram](dijkstra-r3-stage-0.png)
+
+
+1. Stage 1
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|inf|inf|4|0|1|5|
+  |parent[i]|-|-|4|-1|3|4|
+  |inTree[i]|F|F|F|T|T|F|
+  ![Stage 1 diagram](dijkstra-r3-stage-1.png)
+
+
+2. Stage 2
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|inf|17|4|0|1|5|
+  |parent[i]|-|2|4|-1|3|4|
+  |inTree[i]|F|F|T|T|T|F|
+  ![Stage 2 diagram](dijkstra-r3-stage-2.png)
+
+
+3. Stage 3
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|6|17|4|0|1|5|
+  |parent[i]|5|2|4|-1|3|4|
+  |inTree[i]|F|F|T|T|T|T|
+  ![Stage 3 diagram](dijkstra-r3-stage-3.png)
+
+
+4. Stage 4
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|6|9|4|0|1|5|
+  |parent[i]|5|0|4|-1|3|4|
+  |inTree[i]|T|F|T|T|T|T|
+  ![Stage 4 diagram](dijkstra-r3-stage-4.png)
+
+
+5. Stage 5
+  |i|0|1|2|3|4|5|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |dist[i]|6|9|4|0|1|5|
+  |parent[i]|5|0|4|-1|3|4|
+  |inTree[i]|T|T|T|T|T|T|
+  ![Stage 5 diagram](dijkstra-r3-stage-5.png)
+
+Minimum spanning path:
+
+![Minimum spanning path](dijkstra-r3-result.png)
 
 ## 6. Exercise 7.13
 
