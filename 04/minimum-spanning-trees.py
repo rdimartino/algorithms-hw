@@ -2,7 +2,7 @@
 import graphviz
 
 # neato (or fdp) is required for inputscale and pos
-g = graphviz.Digraph(name="G", format="png", engine="neato", graph_attr={"inputscale": "1.5", "size": "1.6,3.2!"})
+g = graphviz.Digraph(name="G", format="png", engine="neato", graph_attr={"inputscale": "1.5", "size": "2,4!"})
 g.attr("node", shape="circle")
 
 # Nodes (x,y)
@@ -88,7 +88,7 @@ def Prim(graph, nodes, edges, root):
                 penwidth="2" if fixed else "1",
                 dir=direction
             )
-        g.render("prim-stage-{}".format(stage),cleanup=True)
+        g.render("images/4/prim/stage-{}".format(stage),cleanup=True)
 
         # Print markdown results
         print("{0}. Stage {0}".format(stage))
@@ -98,7 +98,7 @@ def Prim(graph, nodes, edges, root):
         print("  "+markdownTableRow(["parent[i]"]+[str(p) if p is not None else "-" for p in parent]))
         print("  "+markdownTableRow(["inTree[i]"]+["T" if t else "F" for t in inTree]))
         print("  Weight = {}".format(total))
-        print("  ![Stage {0} diagram](prim-stage-{0}.png)\n\n".format(stage))
+        print("  ![Stage {0} diagram](images/4/prim/stage-{0}.png)\n\n".format(stage))
 
 def Kruskal(graph, nodes, edges):
     sortedEdges = sorted(edges, key=lambda e: e[2])
@@ -128,9 +128,9 @@ def Kruskal(graph, nodes, edges):
                     label=str(weight),
                     dir='none'
                 )
-            g.render("kruskal-stage-{}".format(size),cleanup=True)
+            g.render("images/4/kruskal/stage-{}".format(size),cleanup=True)
             print("{0}. Stage {0}".format(size))
-            print("  ![Stage {0} diagram](kruskal-stage-{0}.png)\n\n".format(size))
+            print("  ![Stage {0} diagram](images/4/kruskal/stage-{0}.png)\n\n".format(size))
 
 
 def find(parents, x):
@@ -163,4 +163,4 @@ for idx, (x,y) in enumerate(nodes):
 
 for start,stop,weight in edges:
     g.edge(str(start), str(stop), label=str(weight), dir='none')
-g.render("graph-G",cleanup=True)
+g.render("images/4/graph-G",cleanup=True)

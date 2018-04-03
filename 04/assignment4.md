@@ -258,38 +258,38 @@ Then `100111100001101111001` decoded is "defaced".
 ## 4.
 
 Consider the following weighted graph G.:
-![Graph G](graph-G.png)
+![Graph G for problem 4](images/4/graph-G.png)
 
 ### a)
 
 **Problem**: Trace the action of procedure `Kruskal` for G.
 
 1. Stage 1
-  ![Stage 1 diagram](kruskal-stage-1.png)
+  ![Stage 1 diagram](images/4/kruskal/stage-1.png)
 
 
 2. Stage 2
-  ![Stage 2 diagram](kruskal-stage-2.png)
+  ![Stage 2 diagram](images/4/kruskal/stage-2.png)
 
 
 3. Stage 3
-  ![Stage 3 diagram](kruskal-stage-3.png)
+  ![Stage 3 diagram](images/4/kruskal/stage-3.png)
 
 
 4. Stage 4
-  ![Stage 4 diagram](kruskal-stage-4.png)
+  ![Stage 4 diagram](images/4/kruskal/stage-4.png)
 
 
 5. Stage 5
-  ![Stage 5 diagram](kruskal-stage-5.png)
+  ![Stage 5 diagram](images/4/kruskal/stage-5.png)
 
 
 6. Stage 6
-  ![Stage 6 diagram](kruskal-stage-6.png)
+  ![Stage 6 diagram](images/4/kruskal/stage-6.png)
 
 
 7. Stage 7
-  ![Stage 7 diagram](kruskal-stage-7.png)
+  ![Stage 7 diagram](images/4/kruskal/stage-7.png)
 
 ### b)
 
@@ -302,7 +302,7 @@ Consider the following weighted graph G.:
   |parent[i]|1|-1|1|-|-|1|-|1|
   |inTree[i]|F|T|F|F|F|F|F|F|
   Weight = 0
-  ![Stage 0 diagram](prim-stage-0.png)
+  ![Stage 0 diagram](images/4/prim/stage-0.png)
 
 
 1. Stage 1
@@ -312,7 +312,7 @@ Consider the following weighted graph G.:
   |parent[i]|5|-1|1|-|5|1|5|1|
   |inTree[i]|F|T|F|F|F|T|F|F|
   Weight = 3
-  ![Stage 1 diagram](prim-stage-1.png)
+  ![Stage 1 diagram](images/4/prim/stage-1.png)
 
 
 2. Stage 2
@@ -324,7 +324,7 @@ Consider the following weighted graph G.:
 
   Weight = 5
 
-  ![Stage 2 diagram](prim-stage-2.png)
+  ![Stage 2 diagram](images/4/prim/stage-2.png)
 
 3. Stage 3
   |i|0|1|2|3|4|5|6|7|
@@ -333,7 +333,7 @@ Consider the following weighted graph G.:
   |parent[i]|5|-1|1|-|5|1|5|0|
   |inTree[i]|T|T|F|F|F|T|T|F|
   Weight = 7
-  ![Stage 3 diagram](prim-stage-3.png)
+  ![Stage 3 diagram](images/4/prim/stage-3.png)
 
 
 4. Stage 4
@@ -343,7 +343,7 @@ Consider the following weighted graph G.:
   |parent[i]|5|-1|1|-|5|1|5|0|
   |inTree[i]|T|T|F|F|F|T|T|T|
   Weight = 10
-  ![Stage 4 diagram](prim-stage-4.png)
+  ![Stage 4 diagram](images/4/prim/stage-4.png)
 
 
 5. Stage 5
@@ -353,7 +353,7 @@ Consider the following weighted graph G.:
   |parent[i]|5|-1|4|4|5|1|5|0|
   |inTree[i]|T|T|F|F|T|T|T|T|
   Weight = 16
-  ![Stage 5 diagram](prim-stage-5.png)
+  ![Stage 5 diagram](images/4/prim/stage-5.png)
 
 
 6. Stage 6
@@ -363,7 +363,7 @@ Consider the following weighted graph G.:
   |parent[i]|5|-1|4|4|5|1|5|0|
   |inTree[i]|T|T|F|T|T|T|T|T|
   Weight = 18
-  ![Stage 6 diagram](prim-stage-6.png)
+  ![Stage 6 diagram](images/4/prim/stage-6.png)
 
 
 7. Stage 7
@@ -376,6 +376,8 @@ Consider the following weighted graph G.:
   
 ## 5.
 
+![Digraph for problem 5](images/5/digraph.png)
+
 ### a)
 
 **Problem**: Trace the action of procedure Dijkstra for the digraph with initial vertex $r = 2$.
@@ -386,7 +388,7 @@ Consider the following weighted graph G.:
   |dist[i]|inf|13|0|3|inf|9|
   |parent[i]|-|2|-1|2|-|2|
   |inTree[i]|F|F|T|F|F|F|
-  ![Stage 0 diagram](dijkstra-r2-stage-0.png)
+  ![Stage 0 diagram](images/5/r2-stage-0.png)
 
 
 1. Stage 1
@@ -395,7 +397,7 @@ Consider the following weighted graph G.:
   |dist[i]|inf|13|0|3|4|9|
   |parent[i]|-|2|-1|2|3|2|
   |inTree[i]|F|F|T|T|F|F|
-  ![Stage 1 diagram](dijkstra-r2-stage-1.png)
+  ![Stage 1 diagram](images/5/r2-stage-1.png)
 
 
 2. Stage 2
@@ -404,7 +406,7 @@ Consider the following weighted graph G.:
   |dist[i]|inf|13|0|3|4|8|
   |parent[i]|-|2|-1|2|3|4|
   |inTree[i]|F|F|T|T|T|F|
-  ![Stage 2 diagram](dijkstra-r2-stage-2.png)
+  ![Stage 2 diagram](images/5/r2-stage-2.png)
 
 
 3. Stage 3
@@ -413,7 +415,7 @@ Consider the following weighted graph G.:
   |dist[i]|9|13|0|3|4|8|
   |parent[i]|5|2|-1|2|3|4|
   |inTree[i]|F|F|T|T|T|T|
-  ![Stage 3 diagram](dijkstra-r2-stage-3.png)
+  ![Stage 3 diagram](images/5/r2-stage-3.png)
 
 
 4. Stage 4
@@ -422,7 +424,7 @@ Consider the following weighted graph G.:
   |dist[i]|9|12|0|3|4|8|
   |parent[i]|5|0|-1|2|3|4|
   |inTree[i]|T|F|T|T|T|T|
-  ![Stage 4 diagram](dijkstra-r2-stage-4.png)
+  ![Stage 4 diagram](images/5/r2-stage-4.png)
 
 
 5. Stage 5
@@ -431,11 +433,11 @@ Consider the following weighted graph G.:
   |dist[i]|9|12|0|3|4|8|
   |parent[i]|5|0|-1|2|3|4|
   |inTree[i]|T|T|T|T|T|T|
-  ![Stage 5 diagram](dijkstra-r2-stage-5.png)
+  ![Stage 5 diagram](images/5/r2-stage-5.png)
 
 Minimum spanning path:
 
-![Minimum spanning path](dijkstra-r2-result.png)
+![Minimum spanning path](images/5/r2-result.png)
 
 ### b)
 
@@ -447,7 +449,7 @@ Minimum spanning path:
   |dist[i]|inf|inf|inf|0|1|inf|
   |parent[i]|-|-|-|-1|3|-|
   |inTree[i]|F|F|F|T|F|F|
-  ![Stage 0 diagram](dijkstra-r3-stage-0.png)
+  ![Stage 0 diagram](images/5/r3-stage-0.png)
 
 
 1. Stage 1
@@ -456,7 +458,7 @@ Minimum spanning path:
   |dist[i]|inf|inf|4|0|1|5|
   |parent[i]|-|-|4|-1|3|4|
   |inTree[i]|F|F|F|T|T|F|
-  ![Stage 1 diagram](dijkstra-r3-stage-1.png)
+  ![Stage 1 diagram](images/5/r3-stage-1.png)
 
 
 2. Stage 2
@@ -465,7 +467,7 @@ Minimum spanning path:
   |dist[i]|inf|17|4|0|1|5|
   |parent[i]|-|2|4|-1|3|4|
   |inTree[i]|F|F|T|T|T|F|
-  ![Stage 2 diagram](dijkstra-r3-stage-2.png)
+  ![Stage 2 diagram](images/5/r3-stage-2.png)
 
 
 3. Stage 3
@@ -474,7 +476,7 @@ Minimum spanning path:
   |dist[i]|6|17|4|0|1|5|
   |parent[i]|5|2|4|-1|3|4|
   |inTree[i]|F|F|T|T|T|T|
-  ![Stage 3 diagram](dijkstra-r3-stage-3.png)
+  ![Stage 3 diagram](images/5/r3-stage-3.png)
 
 
 4. Stage 4
@@ -483,7 +485,7 @@ Minimum spanning path:
   |dist[i]|6|9|4|0|1|5|
   |parent[i]|5|0|4|-1|3|4|
   |inTree[i]|T|F|T|T|T|T|
-  ![Stage 4 diagram](dijkstra-r3-stage-4.png)
+  ![Stage 4 diagram](images/5/r3-stage-4.png)
 
 
 5. Stage 5
@@ -492,11 +494,11 @@ Minimum spanning path:
   |dist[i]|6|9|4|0|1|5|
   |parent[i]|5|0|4|-1|3|4|
   |inTree[i]|T|T|T|T|T|T|
-  ![Stage 5 diagram](dijkstra-r3-stage-5.png)
+  ![Stage 5 diagram](images/5/r3-stage-5.png)
 
 Minimum spanning path:
 
-![Minimum spanning path](dijkstra-r3-result.png)
+![Minimum spanning path](images/5/r3-result.png)
 
 ## 6. Exercise 7.13
 

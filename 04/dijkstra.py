@@ -1,7 +1,7 @@
 # pip install graphviz
 import graphviz
 
-g = graphviz.Digraph(name="G", format="png", engine="neato", graph_attr={"inputscale": "1.5", "size": "1.6,3.2!"})
+g = graphviz.Digraph(name="G", format="png", engine="neato", graph_attr={"inputscale": "1.5", "size": "2,4!"})
 g.attr("node", shape="circle")
 
 # Nodes (x,y)
@@ -73,7 +73,7 @@ def Dijkstra(graph, nodes, edges, root):
                 arrowhead="normal" if solid or fixed else "empty",
                 penwidth="2" if fixed else "1"
             )
-        g.render("dijkstra-r{}-stage-{}".format(root,stage),cleanup=True)
+        g.render("images/5/r{}-stage-{}".format(root,stage),cleanup=True)
 
         # render markdown
         print("{0}. Stage {0}".format(stage))
@@ -82,7 +82,7 @@ def Dijkstra(graph, nodes, edges, root):
         print("  "+markdownTableRow(["dist[i]"]+[str(d) for d in dist]))
         print("  "+markdownTableRow(["parent[i]"]+[str(p) if p is not None else "-" for p in parent]))
         print("  "+markdownTableRow(["inTree[i]"]+["T" if t else "F" for t in inTree]))
-        print("  ![Stage {0} diagram](dijkstra-r{1}-stage-{0}.png)\n\n".format(stage, root))
+        print("  ![Stage {0} diagram](images/5/r{1}-stage-{0}.png)\n\n".format(stage, root))
 
     #render result
     g = graph.copy()
@@ -98,7 +98,7 @@ def Dijkstra(graph, nodes, edges, root):
             str(stop),
             label=str(weight)
         )
-    g.render("dijkstra-r{}-result".format(root),cleanup=True)
+    g.render("images/5/r{}-result".format(root),cleanup=True)
 
 
 Dijkstra(g.copy(), nodes, edges, 2)
@@ -108,4 +108,4 @@ for idx, (x,y) in enumerate(nodes):
     g.node(str(idx), pos="{},{}!".format(x,y))
 for start,stop,weight in edges:
     g.edge(str(start), str(stop), label=str(weight))
-g.render("digraph-dijkstra",cleanup=True)
+g.render("images/5/digraph",cleanup=True)
