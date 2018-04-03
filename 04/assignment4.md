@@ -254,3 +254,142 @@ Reading the string from the front:
 7. `1001` = _d_
 
 Then `100111100001101111001` decoded is "defaced".
+
+## 4.
+
+Consider the following weighted graph G.:
+![Graph G](graph-G.png)
+
+### a)
+
+**Problem**: Trace the action of procedure `Kruskal` for G.
+
+1. Stage 1
+  ![Stage 1 diagram](kruskal-stage-1.png)
+
+
+2. Stage 2
+  ![Stage 2 diagram](kruskal-stage-2.png)
+
+
+3. Stage 3
+  ![Stage 3 diagram](kruskal-stage-3.png)
+
+
+4. Stage 4
+  ![Stage 4 diagram](kruskal-stage-4.png)
+
+
+5. Stage 5
+  ![Stage 5 diagram](kruskal-stage-5.png)
+
+
+6. Stage 6
+  ![Stage 6 diagram](kruskal-stage-6.png)
+
+
+7. Stage 7
+  ![Stage 7 diagram](kruskal-stage-7.png)
+
+### b)
+
+**Problem**: Trace the action of procedure `Prim` for G, with r = 1.
+
+0. Stage 0
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|4|0|7|inf|inf|3|inf|9|
+  |parent[i]|1|-1|1|-|-|1|-|1|
+  |inTree[i]|F|T|F|F|F|F|F|F|
+  Weight = 0
+  ![Stage 0 diagram](prim-stage-0.png)
+
+
+1. Stage 1
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|2|0|7|inf|6|3|2|9|
+  |parent[i]|5|-1|1|-|5|1|5|1|
+  |inTree[i]|F|T|F|F|F|T|F|F|
+  Weight = 3
+  ![Stage 1 diagram](prim-stage-1.png)
+
+
+2. Stage 2
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|2|0|7|inf|6|3|2|3|
+  |parent[i]|5|-1|1|-|5|1|5|0|
+  |inTree[i]|T|T|F|F|F|T|F|F|
+
+  Weight = 5
+
+  ![Stage 2 diagram](prim-stage-2.png)
+
+3. Stage 3
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|2|0|7|inf|6|3|2|3|
+  |parent[i]|5|-1|1|-|5|1|5|0|
+  |inTree[i]|T|T|F|F|F|T|T|F|
+  Weight = 7
+  ![Stage 3 diagram](prim-stage-3.png)
+
+
+4. Stage 4
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|2|0|7|inf|6|3|2|3|
+  |parent[i]|5|-1|1|-|5|1|5|0|
+  |inTree[i]|T|T|F|F|F|T|T|T|
+  Weight = 10
+  ![Stage 4 diagram](prim-stage-4.png)
+
+
+5. Stage 5
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|2|0|3|2|6|3|2|3|
+  |parent[i]|5|-1|4|4|5|1|5|0|
+  |inTree[i]|T|T|F|F|T|T|T|T|
+  Weight = 16
+  ![Stage 5 diagram](prim-stage-5.png)
+
+
+6. Stage 6
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|2|0|3|2|6|3|2|3|
+  |parent[i]|5|-1|4|4|5|1|5|0|
+  |inTree[i]|T|T|F|T|T|T|T|T|
+  Weight = 18
+  ![Stage 6 diagram](prim-stage-6.png)
+
+
+7. Stage 7
+  |i|0|1|2|3|4|5|6|7|
+  |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+  |nearest[i]|2|0|3|2|6|3|2|3|
+  |parent[i]|5|-1|4|4|5|1|5|0|
+  |inTree[i]|T|T|T|T|T|T|T|T|
+  Weight = 21
+  
+## 5.
+
+### a)
+
+**Problem**: Trace the action of procedure Dijkstra for the digraph with initial vertex $r = 2$.
+
+### b)
+
+**Problem**: Repeat for $r = 3$.
+
+## 6. Exercise 7.13
+
+**Problem**: Verify formula (7.4.4)
+
+
+
+## 7.
+
+**Problem**: Design a greedy algorithm to solve the optimal merge pattern problem. In this problem, we have $n$ sorted files of lengths $f_{0}, f_{1}, ..., f_{n-1}$, and we wish to merge them into a single file by a sequence of merges of pairs of files. To merge two files of lengths $m_{1}$ and $m_{2}$ takes $m_{1} + m_{2}$ operations. Describe your algorithm in general, and illustrate it for files of lengths 10,7,3,5,9,2,3,2. (Can you make a connection with Huffman codes and Exercise 1 of this assignment?)
