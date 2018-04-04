@@ -1,13 +1,13 @@
 # Assignment 4 - CS 4071 - Spring 2018
 
-*Due: 2018-02-19*  
+*Due: 2018-04-04*  
 *Group #13: Robert DiMartino (dimartrt), Hayden Schiff (schiffha), Jeremiah Leak (leakjz)*
 
 <div style="page-break-after: always;"></div>
 
 ## 1. Exercise 6.5
 
-**Problem**: Solve the following instance of the knapsack problem for capacity C=30.
+**Problem**: Solve the following instance of the knapsack problem for capacity $C=30$.
 
 |   $i$   |  0   |  1   |  2   |  3   |  4   |  5   |  6   |  7   |
 | :-----: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
@@ -229,7 +229,7 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
 
 ## 3. Exercise 6.10
 
-**Problem**: Given the Huffman Code Tree in Figure 6.6, decode the string `100111100001101111001`
+**Problem**: Given the Huffman Code Tree in Figure 6.6, decode the string `100111100001101111001`.
 
 > **Figure 6.6**
 > | letter | frequency | encoding |
@@ -241,12 +241,12 @@ The fractions, $f_{i}$, of each item that yield the optimal value for the knapsa
 > | _e_ | 15  |`11`|
 > | _f_ | 2  |`1000`|
 
-We read binary characters from the encoded string one at a time. Because the Huffman Code is a prefix code, when the binary substring we've read matches one of the letter encodings from Figure 6.6 we can unambiguously determine which letter is decoded.
+We read binary characters from the encoded string one at a time. Because the Huffman Code is a prefix code, when the binary substring we've read matches one of the letter encodings from Figure 6.6, we can unambiguously determine which letter is decoded.
 
 Reading the string from the front:
 
 1. `1001` = _d_ 
-2. `11` = _e_
+2. `11` = _e_
 3. `1000` = _f_
 4. `01` = _a_
 5. `101` = _c_
@@ -257,7 +257,7 @@ Then `100111100001101111001` decoded is "defaced".
 
 ## 4.
 
-Consider the following weighted graph G.:
+Consider the following weighted graph $G$.
 ![Graph G for problem 4](images/4/graph-G.png)
 
 ### a)
@@ -502,7 +502,7 @@ Minimum spanning path:
 
 ## 6. Exercise 7.13
 
-**Problem**: Verify formula (7.4.4)
+**Problem**: Verify formula (7.4.4).
 
 $$
 AB = \begin{bmatrix} a_{00} & a_{01} \\ a_{10} & a_{11} \end{bmatrix}
@@ -517,17 +517,17 @@ AB \stackrel{?}{=} \begin{bmatrix} m_{1}+m_{4}-m_{5}+m_{7} & m_{3}+m_{5} \\ m_{2
 \end{align}
 $$
 
-To verify 7.4.4, we need to verify each of the four equations about, where:
+To verify 7.4.4, we need to verify each of its four equations, where:
 
 $$
 \begin{align}
-m_{1} &= (a_{00}+a_{11})(b_{00}+b_{11}) &= &a_{00}b_{00}+a_{00}b_{11}+a_{11}b_{00}+a_{11}b_{11} \\
-m_{2} &= (a_{10}+a_{11})(b_{00}) &= &a_{10}b_{00}+a_{11}b_{00} \\
-m_{3} &= a_{00}(b_{01}-b_{11}) &= &a_{00}b_{01} - a_{00}b_{11} \\
-m_{4} &= a_{11}(b_{10}-b_{00}) &= &a_{11}b_{10} - a_{11}b_{00} \\
-m_{5} &= (a_{00}+a_{01})(b_{11}) &= &a_{00}b_{11} + a_{01}b_{11} \\
-m_{6} &= (a_{10}-a_{00})(b_{00}+b_{10}) &= &a_{10}b_{00}+a_{10}b_{10}-a_{00}b_{00}-a_{00}b_{10} \\
-m_{7} &= (a_{01}-a_{11})(b_{10}+b_{11}) &= &a_{01}b_{10}+a_{01}b_{11}-a_{11}b_{10}-a_{11}b_{11}
+m_{1} &= (a_{00}+a_{11})(b_{00}+b_{11}) &= &\ a_{00}b_{00}+a_{00}b_{11}+a_{11}b_{00}+a_{11}b_{11} \\
+m_{2} &= (a_{10}+a_{11})(b_{00}) &= &\ a_{10}b_{00}+a_{11}b_{00} \\
+m_{3} &= a_{00}(b_{01}-b_{11}) &= &\ a_{00}b_{01} - a_{00}b_{11} \\
+m_{4} &= a_{11}(b_{10}-b_{00}) &= &\ a_{11}b_{10} - a_{11}b_{00} \\
+m_{5} &= (a_{00}+a_{01})(b_{11}) &= &\ a_{00}b_{11} + a_{01}b_{11} \\
+m_{6} &= (a_{10}-a_{00})(b_{00}+b_{10}) &= &\ a_{10}b_{00}+a_{10}b_{10}-a_{00}b_{00}-a_{00}b_{10} \\
+m_{7} &= (a_{01}-a_{11})(b_{10}+b_{11}) &= &\ a_{01}b_{10}+a_{01}b_{11}-a_{11}b_{10}-a_{11}b_{11}
 \end{align}
 $$
 
@@ -576,7 +576,7 @@ graph TD
 	n1 --- m_3((m_3))
 ```
 
-The total number of operations to merge these three file is $(m_{2}+m_{3})+(m_{1}+m_{2}+m_{3})$. Notice that $m_{2}$ and $m_{3}$ contribute to the total twice as much $m_{1}$, because they were merged earlier in that process. With that in mind, to minimize the total number of operations, we need to perform the "cheapest" (fewest operations) merge at each stage.
+The total number of operations to merge these three files is $(m_{2}+m_{3})+(m_{1}+m_{2}+m_{3})$. Notice that $m_{2}$ and $m_{3}$ contribute to the total twice as much $m_{1}$, because they were merged earlier in that process. With that in mind, to minimize the total number of operations, we need to perform the "cheapest" (fewest operations) merge at each stage.
 
 For this algorithm, we will store the files in a priority queue where the smallest files have the highest priority. We dequeue and merge the smallest two files and place the result back in the priority queue. In this way, we will always be performing the merge with the fewest possible  operations at each stage, and the "repeated" files are selected to minimize the total number of operations.
 
