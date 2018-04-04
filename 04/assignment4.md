@@ -565,3 +565,46 @@ Since each of the four equations are true, formula 7.4.4 is verified.
 ## 7.
 
 **Problem**: Design a greedy algorithm to solve the optimal merge pattern problem. In this problem, we have $n$ sorted files of lengths $f_{0}, f_{1}, ..., f_{n-1}$, and we wish to merge them into a single file by a sequence of merges of pairs of files. To merge two files of lengths $m_{1}$ and $m_{2}$ takes $m_{1} + m_{2}$ operations. Describe your algorithm in general, and illustrate it for files of lengths 10,7,3,5,9,2,3,2. (Can you make a connection with Huffman codes and Exercise 1 of this assignment?)
+
+A key consideration is that files that are merged early in the process will continue to contribute to the number of operations needed for successive merges. For example:
+
+```mermaid
+graph TD
+	n0[m_1 + m_2 + m_3] --- m_1((m_1))
+	n0 --- n1[m_2 + m_3]
+	n1 --- m_2((m_2))
+	n1 --- m_3((m_3))
+```
+
+The total number of operations to merge these three file is $(m_{2}+m_{3})+(m_{1}+m_{2}+m_{3})$. Notice that $m_{2}$ and $m_{3}$ contribute to the total twice as much $m_{1}$, because they were merged earlier in that process. With that in mind, to minimize the total number of operations, we need to perform the "cheapest" (fewest operations) merge at each stage.
+
+For this algorithm, we will store the files in a priority queue where the smallest files have the highest priority. We dequeue and merge the smallest two files and place the result back in the priority queue. In this way, we will always be performing the merge with the fewest possible  operations at each stage, and the "repeated" files are selected to minimize the total number of operations.
+
+**Example**
+
+File lengths: 10,7,3,5,9,2,3,2
+
+```mermaid
+graph TD
+	m6[16+22=38]---m5
+	m6---m4
+	m5[12+10=22]---f1
+	m5---m3
+	m4[7+9=16]---f2
+	m4---f4
+	m3[5+7=12]---m2
+	m3---f3
+	m2[3+4=7]---m1
+	m2---f6
+	m1[2+2=4]---f5
+	m1---f7
+	%%
+	f1((10))
+	f2((7))
+	f3((5))
+	f4((9))
+	f5((2))
+	f6((3))
+	f7((2))
+```
+This algorithm is identical to the Huffman code algorithm. We are minimizing the weighted path length of the merge tree with respect to the length of the files, instead of the frequencies of words/characters.
