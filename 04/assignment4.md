@@ -1,6 +1,6 @@
 # Assignment 4 - CS 4071 - Spring 2018
 
-*Due: 2018-04-04*  
+*Due: 2018-04-04*
 *Group #13: Robert DiMartino (dimartrt), Hayden Schiff (schiffha), Jeremiah Leak (leakjz)*
 
 <div style="page-break-after: always;"></div>
@@ -246,7 +246,7 @@ We read binary characters from the encoded string one at a time. Because the Huf
 Reading the string from the front:
 
 1. `1001` = _d_ 
-2. `11` = _e_
+2. `11` = _e_
 3. `1000` = _f_
 4. `01` = _a_
 5. `101` = _c_
